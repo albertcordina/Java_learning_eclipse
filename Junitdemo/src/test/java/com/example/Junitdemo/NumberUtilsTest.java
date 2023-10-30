@@ -14,9 +14,8 @@ public class NumberUtilsTest {
 	public void evenTest2 () {
 		NumberUtils numberUtils = new NumberUtils();
 		assertEquals (true, numberUtils.isEven (10));
-	}
-	
-	
+	}	
+//---------------------------------------------------------	
 	@Test
 	public void calculateFactorialTest1 () {
 		NumberUtils numberUtils = new NumberUtils();
@@ -27,5 +26,4 @@ public class NumberUtilsTest {
 		NumberUtils numberUtils = new NumberUtils();
 		assertEquals (120, numberUtils.calculateFactorial (5));
 	}
-
 }
