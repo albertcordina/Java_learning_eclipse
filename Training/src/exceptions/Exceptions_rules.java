@@ -39,3 +39,39 @@ public class Exceptions_rules {
 	
 	}
 }
+//------------------------------ 'DO WHILE' LOOP (IF STRING IN STEAD OF INT) ------------------------------------//
+/*
+                --- Requesting the user to enter a number and not any other character ---  
+
+      do {
+          try {
+              System.out.print("Enter a positive valid number/option: ");
+              n = scan.nextInt();
+          }                    //       in case of entering String instead of int;
+          catch (InputMismatchException e) {System.out.println("There should be a number, not the character(s).");
+              scan.nextLine(); }
+      }
+      while  (n <= 0);            // condition of a positive number to enter (as example)
+      while (!(n > 0 || n < 6)); // and also restricting to a number/option within the Menu (as example)
+      scan.close();
+  }
+}
+
+                                        USING THE WHILE LOOP:
+                                     
+              int age;                  //  example of int
+              boolean input = false;
+
+				while (!input) { // the loop to request the user a number not any other character
+				try {
+					System.out.print("Enter your age: ");
+					age = scan.nextInt();
+                  input = true;
+                  scan.nextLine();
+
+				} catch (InputMismatchException e) {  //   the 'java.util.InputMismatchException'
+					System.out.print("Invalid input. ");
+					scan.nextLine();
+				} }
+
+*/

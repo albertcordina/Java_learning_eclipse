@@ -3,11 +3,10 @@ import java.util.*;
 
 public class HashMap_Advandced {
 
-	static int option;
-	static Integer id;
-	static String name;
-	static String course;
-	static Integer grade;
+	private static Integer id;
+	private static String name;
+	private static String course;
+	private static Integer grade;
 
 	public static void main(String[] args) {
 
@@ -19,6 +18,7 @@ public class HashMap_Advandced {
 
 		System.out.print("-WELCOME TO OUR 'STUDENT GRADE TRACKER APPLICATION!'\n");
 
+		int option;
 		do {
 			System.out.print("\n\t   -THE MENU-\n\nPress '1' to enter your student's information"
 					+ "\nPress '2' to retrive your personal info\nPress '3' to amend your personal info\nPress '4' to Exit\n\n"
@@ -26,7 +26,7 @@ public class HashMap_Advandced {
 			option = scanner.nextInt();
 
 			switch (option) {
-
+//-------------------------------------------------------------------
 			case 1:
 				System.out.print("\nPlease, enter your ID: ");
 				Integer id1 = scanner.nextInt();
@@ -47,6 +47,7 @@ public class HashMap_Advandced {
 				Integer grade1 = scanner.nextInt();
 				idGrade.put(id1, grade1);
 				break;
+//-----------------------------------------------------------------------				
 			case 2:
 				System.out.print("\nEnter your ID: ");
 				int id2 = scanner.nextInt();
@@ -60,6 +61,7 @@ public class HashMap_Advandced {
 					break;
 				}
 				break;
+//-------------------------------------------------------------------------				
 			case 3:
 				System.out.print("\nEnter your ID: ");
 				int id3 = scanner.nextInt();
@@ -108,6 +110,8 @@ public class HashMap_Advandced {
 				}
 
 				break;
+//--------------------------------------------------------------------------------------				
+				
 			case 4:
 				System.out.println("Thank you for your session!");
 				break;

@@ -42,7 +42,7 @@ public class HashMap_with_custom_object_Scanner {
 
         list.put(phoneNumber, new Help(newName, surname, age, password)); // placing a new name;
 
-
+//---------------------------------------------------------------------------------------------------
         for (Map.Entry<Integer, Help> map : list.entrySet()) {   //  TO ITERATE THE WHOLE 'HashMap' (used mainly only for a review);
             System.out.println("\n\nThe phone number is " + map.getKey() + map.getValue());}
 

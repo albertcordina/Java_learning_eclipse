@@ -1,8 +1,8 @@
 import java.util.Scanner;
 
 public class Application {
-	public static String name; // we store the important info taken from the applicant
-	public static byte age; // for the further use/ analise by the 'children' classes;
+	 static String name; // we store the important info taken from the applicant
+	 static byte age; // for the further use/ analise by the 'children' classes;
 	public static byte lengthOfNotSupported;
 
 	public static void main(String[] args) {
@@ -73,6 +73,8 @@ public class Application {
 
 //---------------------------------------------------------------------------------------------------------------------
 class Student extends Application {
+
+
 	void eligibility() {
 		Scanner scanner = new Scanner(System.in);
 
