@@ -17,8 +17,8 @@ class Counter extends Thread {
 //	Counter () { count = new AtomicInteger();}
 	AtomicInteger count = new AtomicInteger (); // a short way of the above
 	
-	public void run () { for (int n = 0; n < 30000; n++ ) { count.addAndGet(1);} // parameter of 'addAndGet' method is for a number of the sessions to execute
-	}
+	public void run () { for (int n = 0; n < 30000; n++ ) { count.addAndGet(1);} // parameter of 'addAndGet' method is
+	}                                                                           // for a number of the sessions to execute
 }
 
 public class AtomicInteger_rules {

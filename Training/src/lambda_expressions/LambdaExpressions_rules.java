@@ -1,5 +1,6 @@
 package lambda_expressions;
 import java.util.*;
+
 import java.util.function.Consumer;
 
 public class LambdaExpressions_rules {
@@ -21,7 +22,8 @@ public class LambdaExpressions_rules {
 	    numbers1.add(9);
 	    numbers1.add(8);
 	    numbers1.add(1);
-	    numbers1.forEach( (n1) -> { System.out.println(n1); } );
+	    numbers1.forEach( (n1) -> { System.out.println(n1); } ); // https://www.baeldung.com/foreach-java
+	    numbers1.forEach((n) -> {System.out.println(n);} );
 	    
 	    // Use Java's Consumer interface to store a lambda expression in a variable,i.e. (java.util.function.Consumer;) :
 	    ArrayList<Integer> numbers2 = new ArrayList<Integer>();
