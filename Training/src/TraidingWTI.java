@@ -12,8 +12,16 @@ public class TraidingWTI {
 
 	private static int course;
 	private static int leverage;
-
+	private static int numberOfBarrels;
+	
 	public static void main(String[] args) {
+		
+		function();
+	}
+	
+	
+
+	public static void function () {
 
 		Scanner scan = new Scanner(System.in);
 
@@ -24,20 +32,23 @@ public class TraidingWTI {
 				course = scan.nextInt();
 				scan.nextLine();
 			} catch (Exception e) {
-				System.out.print("Enter a positive number, not a character.");
+				System.out.print("Enter a positive number, not a character.\n");
 				scan.nextLine();
 			}
 		} while (course <= 1);
 
-		int costToKeepPositionsUnder = course * (course + 1) / 2;
-		int differencePositionsAbove = 150 - course;
-		int costToKeepPositionsAbove = differencePositionsAbove * (differencePositionsAbove + 1) / 2;
+		double costToKeepPositionsUnder = course * (course + 1) / 2;
+		double differencePositionsAbove = 150 - course;
+		double costToKeepPositionsAbove = differencePositionsAbove * (differencePositionsAbove + 1) / 2;
 
 		if (course > 90) {
 			System.out.println(
-					"The cost of keeping the " + differencePositionsAbove + " positions = " + costToKeepPositionsAbove);
+					"\nThe cost of keeping:\nthis single position = " + differencePositionsAbove +
+					"\nthe " + differencePositionsAbove + " positions = " + costToKeepPositionsAbove);
 		} else {
-			System.out.println("The cost of keeping the " + course + " positions = " + costToKeepPositionsUnder);
+			System.out.println(
+					"\nThe cost of keeping:\nthis single position = " + course +
+					"\nthe " + course + " positions = " + costToKeepPositionsUnder);
 		}
 
 //---------------------- the calculation of the cost of the positions -----------------		
@@ -47,28 +58,46 @@ public class TraidingWTI {
 				leverage = scan.nextInt();
 
 			} catch (Exception e) {
-				System.out.print("Enter a positive number, not a character.");
+				System.out.print("Enter a positive number, not a character.\n");
 				scan.nextLine();
 			}
 		} while (leverage <= 1);
 
-		int costOfPositionsUnder = costToKeepPositionsUnder / leverage;
-		int costOfPositionsAbove = ((150 * (150 + 1) / 2) - costToKeepPositionsUnder) / leverage;
+		double costOfPositionsUnder = costToKeepPositionsUnder / leverage;
+		double costOfPositionsAbove = ((150 * (150 + 1) / 2) - costToKeepPositionsUnder) / leverage;
 
-		int costTotalUnder = costToKeepPositionsUnder + costOfPositionsUnder;
-		int costTotalAbove = costToKeepPositionsAbove + costOfPositionsAbove;
+		double costTotalUnder = costToKeepPositionsUnder + costOfPositionsUnder;
+		double costTotalAbove = costToKeepPositionsAbove + costOfPositionsAbove;
 		
 //------------------------------------ the final report -----------------------------------
 		if (course > 90) {
-			System.out.println("The cost of the " + differencePositionsAbove
+			System.out.println("\nThe cost of the " + differencePositionsAbove
 					+ " positions with the implementation of the leverage = " + costOfPositionsAbove);
-			System.out.println("Therefore, the total cost of the positions and to keep them is: " + costTotalAbove);
+			System.out.println("Therefore, the total cost of the positions and to keep them = " + costTotalAbove);
 		} else {
-			System.out.println("The cost of the " + course + " positions with the implementation of the leverage = "
+			System.out.println("\nThe cost of the " + course + " positions with the implementation of the leverage = "
 					+ costOfPositionsUnder);
-			System.out.println("Therefore, the total cost of the positions and to keep them is: " + costTotalUnder);
+			System.out.println("Therefore, the total cost of the positions and to keep them = " + costTotalUnder);
 		}
+//----------------------------- asking about the number of Barrels ------------------------	
+		
+		do {
+			try {
+				System.out.print("\nEnter the amount of Barrels you would like to traid with: ");
+				numberOfBarrels = scan.nextInt();
 
+			} catch (Exception e) {
+				System.out.print("Enter a positive number, not a character.\n");
+				scan.nextLine();
+			}
+		} while (numberOfBarrels < 1);
+		
+		if (course > 90) {
+		System.out.println("\nThe cost of the " + numberOfBarrels + " Barrel(s) = " + (numberOfBarrels * costTotalAbove));}
+		else {System.out.println("\nThe cost of the " + numberOfBarrels + " Barrels(s) = " + (numberOfBarrels * costTotalUnder));}
+//------------------------------------------------------------------------------	
+		scan.close();
 	}
-
 }
+
+
