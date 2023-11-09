@@ -15,6 +15,7 @@ public class TicketBookingExercise {
 }
 //---------------------------------------------------------------------------
 class TicketBookingSystem {
+	
 	private int totalTickets;
 
 	public TicketBookingSystem(int initialTickets) {
