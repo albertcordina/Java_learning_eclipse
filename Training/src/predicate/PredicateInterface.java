@@ -1,9 +1,7 @@
-package lambda_expressions;
+package predicate;
 
 //Java program to illustrate Simple Predicate 
 /*
- * 
- * 
  * https://www.geeksforgeeks.org/java-8-predicate-with-examples/
  */
 
