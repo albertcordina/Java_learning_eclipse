@@ -1,14 +1,10 @@
 import java.util.*;
 public class Arrays {
 	
-	
-	
 	public static int maximum (int [] numbers) { 
 		int maxSoFar = numbers [0];	
 		for (int num : numbers) { if (num > maxSoFar) {	maxSoFar = num;}}
 		return (maxSoFar);}
-	
-	
 	
 
 	public static void main(String[] args) {
@@ -16,11 +12,6 @@ public class Arrays {
 		int [] cars = {5, 16, 7};
 		
 		System.out.println (maximum(cars));
-
-		
-		
-		
-		
 
 		
 		List <Cat> cats = new ArrayList <> (); // ArrayList with customer objects
@@ -69,5 +60,4 @@ class Cat {
 	public String toString () {
 		return "\nThe name: " + name + "\nThe type: " + type + "\nThe age: " + age + "\nThe length: " + length;
 	}
-	
 }

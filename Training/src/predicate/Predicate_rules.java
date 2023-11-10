@@ -23,10 +23,9 @@ public class Predicate_rules {
 		
 //------------------------------------- shorter way -----------------------------------------		
 		
-		Predicate <String> p2 = s -> s.length() < 5; // use 'lambda expression' instead of unknownymous class
+		Predicate <String> p2 = s -> s.length() < 5; // use 'lambda expression' instead of anonymous class
 
 		System.out.println(p2.test("apple")); // print out 'false'
 		System.out.println(p2.test("pear")); // print out 'true'
 	}
-
 }
