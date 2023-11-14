@@ -71,6 +71,8 @@ class CollectionInfoMenu extends StudentData {
 			System.out.println("\tWelcome to the main Menu!");
 		}
 
+		
+		
 		do {
 			System.out.print(
 					"\n\t\t   The Menu:\n'1' - the amendment of your personal info -\n'2' - to remove your profile from the list\n'3' - Exit\n\nEnter your valid option here: ");

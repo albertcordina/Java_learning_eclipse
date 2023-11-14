@@ -52,12 +52,36 @@ public class Exceptions_rules {
               scan.nextLine(); }
       }
       while  (n <= 0);            // condition of a positive number to enter (as example)
-      while (!(n > 0 || n < 6)); // and also restricting to a number/option within the Menu (as example)
+      while (n < 0 && n > 4);    // and also restricting to a number/option within the Menu (1 - 4, as example)
       scan.close();
   }
 }
+-------------------------------------- AS A METHOD TO COLLECT THE NUMBER -----------------------------------
 
-                                        USING THE WHILE LOOP:
+     int actualNumber = 0;     // the actual/ working int
+     getNumber(actualNumber); //  call the method and run the actualNumber for getting the result 
+
+	private static int getNumber(int number) {
+
+		Scanner scanner = new Scanner(System.in);
+		
+		do {
+			try {
+				System.out.print("Enter the number: ");
+				number = scanner.nextInt();
+			} // in case of entering String instead of int;
+			catch (InputMismatchException e) {
+				System.out.println("There should be a positive number, not any other character(s).");
+				scanner.nextLine();
+			}
+		} 
+		while  (number < 1);            // condition of a positive number to enter (as example)
+        while (number < 0 && number > 4);    // and also restricting to a number/option within the Menu (1 - 4, as example)
+		scanner.close();
+		return number;		
+	} 
+
+--------------------------------------------- USING THE WHILE LOOP: ------------------------------------------------
                                      
               int age;                  //  example of int
               boolean input = false;
