@@ -6,7 +6,7 @@ import java.util.*;
 
 public class Predicate_ListFiltering_forCustomObjects extends Objects {
 
-    Predicate_ListFiltering_forCustomObjects(String a, String b) {
+    Predicate_ListFiltering_forCustomObjects(String a, String b) { // Constructor
         super(a, b);
     }
     public static void main(String[] args) {
@@ -16,7 +16,7 @@ public class Predicate_ListFiltering_forCustomObjects extends Objects {
 }
 //----------------------------------------------------------------------
 
-class Objects {
+ class Objects {
 
     String name, role;
 
