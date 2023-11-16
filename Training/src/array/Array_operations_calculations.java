@@ -1,6 +1,6 @@
 package array;
 import java.util. *;
-public class Arrays_operations_calculations {
+public class Array_operations_calculations {
 
     public static void main(String[] args) {
 

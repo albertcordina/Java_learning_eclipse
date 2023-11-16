@@ -177,13 +177,16 @@ public class BankingSystemApp {
 	}
 
 	private static void performTransaction(Scanner scanner, Bank bank, String transactionType) {
+		
 		System.out.print("Enter account number. ");
 		// int accountNumber = scanner.nextInt();
 		int accountNumber = getNumber();
+		
 		System.out.print("Enter amount $. ");
 		// double amount = scanner.nextDouble();
 		// scanner.nextLine(); // Consume newline
 		double amount = getNumberForDouble();
+		
 		Optional<Account> account = bank.findAccountByNumber(accountNumber);
 		account.ifPresentOrElse(acc -> {
 			switch (transactionType) {
@@ -198,14 +201,18 @@ public class BankingSystemApp {
 	}
 
 	private static void performTransfer(Scanner scanner, Bank bank) {
+		
 		System.out.print("Enter source account number. ");
 		int sourceAccountNumber = getNumber();
+		
 		System.out.print("Enter destination account number. ");
 		int destinationAccountNumber = getNumber();
+		
 		System.out.print("Enter transfer amount in $. ");
 		// double transferAmount = scanner.nextDouble();
 		// scanner.nextLine(); // Consume newline
 		double transferAmount = getNumberForDouble();
+		
 		Optional<Account> sourceAccount = bank.findAccountByNumber(sourceAccountNumber);
 		Optional<Account> destinationAccount = bank.findAccountByNumber(destinationAccountNumber);
 		if (sourceAccount.isPresent() && destinationAccount.isPresent()) {
@@ -216,6 +223,7 @@ public class BankingSystemApp {
 	}
 
 	private static void findAccount(Scanner scanner, Bank bank) {
+		
 		System.out.print("Enter account number to find. ");
 		// int accountNumberToFind = scanner.nextInt();
 		// scanner.nextLine(); // Consume newline
@@ -230,7 +238,9 @@ public class BankingSystemApp {
 		// int accountNumberToRemove = scanner.nextInt();
 		// scanner.nextLine(); // Consume newline
 		int accountNumberToRemove = getNumber();
+		
 		Optional<Account> removedAccount = bank.findAccountByNumber(accountNumberToRemove);
+		
 		removedAccount.ifPresentOrElse(account -> {
 			bank.removeAccount(accountNumberToRemove);
 			System.out.println("Account removed:\n" + account);

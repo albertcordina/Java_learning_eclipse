@@ -17,7 +17,7 @@ public class Multidimensional_arrays_Scanner {
 															 // previous user's inputs;
 		for (int i = 0; i < numberOfRows; i++) {
 			for (int j = 0; j < numberOfColumns; j++) {
-				arr[i][j] = (i + 2) * (j + 2);
+				arr[i][j] = (i+2) * (j+2);
 			}
 		}
 		for (int[] rows : arr) { for (int value : rows) { System.out.print(value + "");}
