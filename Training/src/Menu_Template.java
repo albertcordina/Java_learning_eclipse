@@ -3,7 +3,7 @@ import java.util.*;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class MenuTemplate {
+public class Menu_Template {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);

@@ -1,6 +1,6 @@
-package electronic;
+package setters_and_getters;
 
-public class Method_example2 {
+public class SetGet_example {
 
 	public static void main(String[] args) {
 
