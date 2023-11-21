@@ -1,7 +1,7 @@
 
 import java.util.Scanner;
 
-public class CalculatorSwitch {
+public class Calculator_switch_valueOf {
 	
     public static void main(String[] args) {
     	
