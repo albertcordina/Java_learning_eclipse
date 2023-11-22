@@ -31,7 +31,7 @@ public class Stream_parallel_FilteringChallenge {
 		long startTimeParallel = System.currentTimeMillis();
 		long endTimeParallel = System.currentTimeMillis();
 
-		List<Integer> parallelResult = parallelFilterExample(numbers);
+		List <Integer> parallelResult = parallelFilterExample(numbers);
 		System.out.println("Parallel Execution Time: " + (endTimeParallel - startTimeParallel) + "ms");
 
 		// Print out the filtered results

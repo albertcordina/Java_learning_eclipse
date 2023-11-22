@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class Taking_IntAndDoublePositive_Scanner {
+public class Taking_Int_Double_positive_methods_Scanner {
 
 	static Scanner scanner = new Scanner(System.in);
 

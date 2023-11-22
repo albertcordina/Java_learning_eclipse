@@ -1,7 +1,7 @@
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class Taking_IntAndDouble_Scanner {
+public class Taking_Int_Double_methods_Scanner {
 
 	static Scanner scanner = new Scanner (System.in);
 	

@@ -29,6 +29,8 @@ public class Menu_Template {
                         break;
                     case 0:
                         System.out.println("Exiting the menu. Goodbye!");
+                        System.out.println("Thank you for your session!");
+                        System.out.println("Thank you for visiting us!");
                         break;
                     default:
                         System.out.println("Invalid choice. Please enter a valid option.");
