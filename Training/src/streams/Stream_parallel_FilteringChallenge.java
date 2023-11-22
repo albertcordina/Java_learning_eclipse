@@ -3,7 +3,7 @@ package streams;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FilteringChallenge {
+public class Stream_parallel_FilteringChallenge {
 
 	private static List <Integer> sequentialFilterExample (List <Integer> numbers) {
 		return numbers.stream().filter(n -> n % 2 != 0).toList();
