@@ -21,7 +21,7 @@ public class Predicate_PasswordValidator {
 		System.out.printf("Result: Password %s valid.%n", result ? "is not" : "is"); 
 																						 
 
-		scanner.close();
+		scanner.close(); // Close the Scanner to avoid resource leaks
 	}
 
 	// Predicate to check if a password is not valid based on specified criteria
