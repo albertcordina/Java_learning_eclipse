@@ -23,7 +23,9 @@ public class Calculator_switch_valueOf {
     }
 
     private static String performOperation(double operand1, double operand2, char operator) {
+    	
         return switch (operator) {
+        
             case '+' -> String.valueOf(operand1 + operand2); // 'valueOf' - Returns the string representation of the double argument.
             case '-' -> String.valueOf(operand1 - operand2);
             case '*' -> String.valueOf(operand1 * operand2);
