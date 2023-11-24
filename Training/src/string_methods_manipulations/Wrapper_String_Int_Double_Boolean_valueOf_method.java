@@ -3,10 +3,10 @@ package string_methods_manipulations;
 /*
  * the valueOf method is a static method that belongs to certain classes, 
  * such as wrapper classes (e.g., Integer, Double, Boolean) and some other classes like String. 
- * This method is used to CREATE AN OBJECT of the corresponding class FROM GIVIN PRIMITIVE TYPE or STRING.
+ * This method is used to CREATE AN OBJECT of the corresponding class FROM GIVEN PRIMITIVE TYPE or STRING.
  * 
  */
-public class String_Int_Double_Boolean_valueOf_method {
+public class Wrapper_String_Int_Double_Boolean_valueOf_method {
 
 	public static void main(String[] args) {
 
