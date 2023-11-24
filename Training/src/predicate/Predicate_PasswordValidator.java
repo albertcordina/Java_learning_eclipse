@@ -25,7 +25,7 @@ public class Predicate_PasswordValidator {
 	}
 
 	// Predicate to check if a password is not valid based on specified criteria
-	private static Predicate<String> isNotValidPassword() {
+	private static Predicate <String> isNotValidPassword() {
 		
 		return Predicate.not(password -> password.length() >= 8 && password.matches(".*[A-Z].*") && password.matches(".*\\d.*"));
 		}

@@ -10,7 +10,7 @@ class VirtualItem {
 	private double price;
 	private int points;
 
-	public VirtualItem(int itemID, String name, double price, int points) {
+	public VirtualItem (int itemID, String name, double price, int points) {
 		this.itemID = itemID;
 		this.name = name;
 		this.price = price;

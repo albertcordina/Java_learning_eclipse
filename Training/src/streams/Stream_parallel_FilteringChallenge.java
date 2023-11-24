@@ -10,8 +10,7 @@ public class Stream_parallel_FilteringChallenge {
 	}
 
 	private static List <Integer> parallelFilterExample (List <Integer> numbers) {
-		return numbers.parallelStream().filter(n -> n % 2 != 0).toList();
-	}
+		return numbers.parallelStream().filter(n -> n % 2 != 0).toList();	}
 
 	public static void main(String[] args) {
 		// Create a list of integers (e.g., 1, 2, 3, 4, 5, ...)

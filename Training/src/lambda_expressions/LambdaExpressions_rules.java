@@ -26,31 +26,31 @@ public class LambdaExpressions_rules {
 	    numbers1.forEach((n) -> {System.out.println(n);} );
 	    
 	    // Use Java's Consumer interface to store a lambda expression in a variable,i.e. (java.util.function.Consumer;) :
-	    ArrayList<Integer> numbers2 = new ArrayList<Integer>();
+	    ArrayList <Integer> numbers2 = new ArrayList <Integer>();
 	    numbers2.add(5);
 	    numbers2.add(9);
 	    numbers2.add(8);
 	    numbers2.add(1);
-	    Consumer<Integer> method = (n2) -> { System.out.println(n2); };
+	    Consumer <Integer> method = (n2) -> { System.out.println(n2); };
 	    numbers2.forEach( method ); // 'forEach' method performs the given action for each element of the Iterable 
 	                               //     until all elements have been processed or the action throws an exception. 
 	    // To use a lambda expression in a method - 
-	   // the method should have a parameter with a single-method interface as its type (see below). 
-	  //  Calling the interface's method will run the lambda expression.
-	 //   Create a method which takes a lambda expression as a parameter:
+	   //  the method should have a parameter with a single-method interface as its type (see below). 
+	  //   Calling the interface's method will run the lambda expression.
+	 //    Create a method which takes a lambda expression as a parameter:
 	        
-	    StringFunction exclaim = (a) -> a + "!";
-	    StringFunction ask = (a) -> a + "?";
+	    Entering exclaim = (a) -> a + "!";
+	    Entering ask = (a) -> a + "?";
 	    printFormatted("Hello", exclaim); // calling the method 'printFormatted' with the assigned values: 'Hello' and 'exclaim'
 	    printFormatted("Hello", ask);
 	  }
-	  public static void printFormatted(String str, StringFunction format) { // 'format' is access to the 'StringFunction' interface 
-	    String result = format.run(str); // putting into one String the  'StringFunction' interface
+	  public static void printFormatted (String str, Entering temp) { // 'format' is access to the 'Entering' interface 
+	    String result = temp.run(str); // putting into one String the  'StringFunction' interface
 	    System.out.println(result);
 	    
 	  }
 	}
-interface StringFunction { String run(String str);}
+interface Entering { String run(String str);}
 
 
 
