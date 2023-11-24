@@ -20,12 +20,13 @@ section at a time, preventing race conditions and ensuring the integrity of the 
 Here's a simple example where ReentrantLock is used to protect a shared counter:
  * 
  */
-public class SharedCounter {
+public class ReentrantLock_simpleExample_Explanation {
+	
 	private int count = 0;
 	private Lock lock = new ReentrantLock();
 
 	public static void main(String[] args) {
-		SharedCounter sharedCounter = new SharedCounter();
+		ReentrantLock_simpleExample_Explanation sharedCounter = new ReentrantLock_simpleExample_Explanation();
 		sharedCounter.runExample();
 	}
 
