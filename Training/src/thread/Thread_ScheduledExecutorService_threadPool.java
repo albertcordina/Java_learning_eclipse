@@ -1,4 +1,4 @@
-package thread_scheduledexecutorservice;
+package thread;
 
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -7,7 +7,7 @@ import java.util.concurrent.TimeUnit;
  * 'ExecutorService' provides mechanisms for safely starting, closing down, submitting, executing,
  *  and blocking on the successful or abrupt termination of tasks (expressed as Runnable or Callable).
  */
-public class ScheduledExecutorService_threadPool {
+public class Thread_ScheduledExecutorService_threadPool {
 
 	public static void main(String[] args) { // we can specify also the delay time of Thread
 
@@ -36,4 +36,3 @@ public class ScheduledExecutorService_threadPool {
 		catch (InterruptedException e) { e.printStackTrace();}			
 	}
 }
-

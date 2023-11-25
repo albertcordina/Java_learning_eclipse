@@ -3,7 +3,9 @@ package thread_scheduledexecutorservice;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
-// for one single Thread, smaller task/number of Threads
+/*
+ * fixed-size thread executor creates an executor with only one thread, so it can only execute one task at a time.
+ */
 public class ScheduledExecutorService_singleThread { // one Thread with many tasks
 
 	public static void main(String[] args) {
