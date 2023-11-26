@@ -1,0 +1,29 @@
+STREAM in JAVA:
+
+In Java, a Stream is a sequence of elements that can be processed in parallel or sequentially. 
+It is part of the java.util.stream package and was introduced in Java 8 as a key feature of the Stream API. 
+The Stream API provides a declarative and functional approach to process collections of data.
+
+
+Here are some key characteristics and concepts related to Stream:
+
+Declarative Programming: 
+Streams allow you to express complex data processing operations in a declarative style rather than using 
+an imperative style. This makes code more concise, readable, and often more expressive.
+
+Pipelining: 
+Stream operations can be pipelined, meaning you can perform a sequence of operations on a stream in a chained fashion. 
+This facilitates a fluent and expressive coding style.
+
+Immutable Data: 
+Streams do not modify the underlying data source. Instead, they create a new stream that reflects the result 
+of the operation. This supports functional programming principles and avoids side effects.
+
+Lazy Evaluation: 
+Stream operations are often lazily evaluated. This means that intermediate operations (like filtering or mapping) 
+are not executed until a terminal operation (like forEach or collect) is invoked. Lazy evaluation can improve 
+performance by avoiding unnecessary computation.
+
+Parallelism: 
+Streams can be processed in parallel, allowing for more efficient utilization of multi-core processors. 
+Parallel streams can be created using the parallel() method.
