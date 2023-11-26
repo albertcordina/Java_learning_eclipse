@@ -15,9 +15,9 @@ public class Stream_rules_and_methods_forLists {
 		List<String> names = Arrays.asList("Johnny", "Jane", "Doe", "Alice", "Bob");          //  List of Strings
 		List<Integer> numbers = Arrays.asList(5, 10, 2, 8, 1, 9, 6, 3, 7, 4);                //   List of Integer
 
-		
-// 'filter' method: Used to -FILTER- elements based on a given condition:	
-
+/*
+ * 1. The 'filter' method: Used to -FILTER- elements based on a given condition:
+ */
 		names.stream().filter(name -> name.startsWith("J")).forEach(System.out::println);
 		names.stream().filter(name -> name.length() > 5).forEach(System.out::println); // printing out 'Johnny'
 
@@ -27,22 +27,30 @@ public class Stream_rules_and_methods_forLists {
 		// Sorting objects based on a specific attribute:
 		people.stream().filter(person -> person.age > 25).forEach(person -> System.out.println(person.name));
 		people.stream().filter(person -> person.name == "Lolo").forEach(person -> System.out.println(person.age));
-
 		
-// 'map' method: Used to -TRANSFORM- each element of the stream using a given function:
-		/*
-		 * map method can be used to transform elements in a stream based on a specified function. 
-		 * You can customize the mapping function to suit your specific transformation requirements.
-		 */
-		names.stream().map(String::toUpperCase).forEach(System.out::println); // Converting strings to uppercase
-		numbers.stream().map(n -> n * 2).forEach(System.out::println);       // Doubling each number in a list (example)
+
+/*
+ * 2. The 'map' method: Used to -TRANSFORM- each element of the stream using a given function:
+ *        map method can be used to transform elements in a stream based on a specified function.
+ *        You can customize the mapping function to suit your specific transformation requirements.
+ */
+		List<String> namesUpperCase = names.stream().map(String::toUpperCase).toList(); // Converting strings to uppercase and 'toList' places it to a new List
+		namesUpperCase.forEach(System.out::println);                                   // print out the new List
+		//names.stream().map(String::toUpperCase); // we can also simply convert the orginal List
+		
+		List<String> numbersString = numbers.stream().map(Object :: toString).toList(); // Converting Int to strings and placing it to a new List
+		numbersString.forEach(System.out::println);                                    // print out the new converted List
+		//numbers.stream().map(Object :: toString); // we can also simply convert the orginal List
+		
+		numbers.stream().map(n -> n * 2).forEach(System.out::println);  // Doubling each number in a list (example)
 		
 		// Extracting a specific attribute from objects
         people.stream().map(person -> person.name).forEach(System.out::println); 
-
         
-// 'sorted' method: Used to -SORT- the elements of the stream in alphabetical or numerical/ natural order:
 
+/*
+ * 3. The 'sorted' method: Used to -SORT- the elements of the stream in alphabetical or numerical/ natural order:
+ */
 		names.stream().sorted().forEach(System.out::println);   // prints out the 'names' in alphabetical order 
 		numbers.stream().sorted().forEach(System.out::println);//  prints out the 'numbers' in numerical order
 
@@ -50,8 +58,9 @@ public class Stream_rules_and_methods_forLists {
 		people.stream().sorted((p1, p2) -> p1.name.compareTo(p2.name)).forEach(person -> System.out.println(person.name));
 
 		
-// 'collect' method: Used to -ACCUMULATE- elements of the stream into a collection. i.e. another List:
-		
+/*
+ * 4. The 'collect' method: Used to -ACCUMULATE- elements of the stream into a collection. i.e. another List:
+ */	
 		List<String> filteredNamesList1 = names.stream().filter(name -> name.length() > 3).collect(Collectors.toList());
 		System.out.println(filteredNamesList1); // here we filter the List for the lenght of the names and save into List1
 		

@@ -19,8 +19,8 @@ public class Stream_Allothers_likeReadingFiles {
 
 // Collections: You can create a stream from various collection types like lists, sets, and maps.
 				
-		List<String> list = Arrays.asList("apple", "banana", "cherry");
-		Stream<String> streamFromList = list.stream();
+		List <String> list = Arrays.asList("apple", "banana", "cherry");
+		Stream <String> streamFromList = list.stream();
 		streamFromList.filter(a -> a.length() > 5).map(String::toUpperCase).forEach(System.out::println);
 			
 		
@@ -47,7 +47,7 @@ public class Stream_Allothers_likeReadingFiles {
 // Generators: You can create a stream using the Stream.generate method.
 		
 		// Generate an infinite stream of number '42'		
-		Stream<Integer> infiniteStream = Stream.generate(() -> 42).limit(5);
+		Stream <Integer> infiniteStream = Stream.generate(() -> 42).limit(5);
 		infiniteStream.forEach(System.out::println);
 		
 		// Generate an infinite stream of random numbers between 0 and 9

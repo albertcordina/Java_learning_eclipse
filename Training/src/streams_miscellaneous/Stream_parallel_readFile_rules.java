@@ -1,4 +1,4 @@
-package streams;
+package streams_miscellaneous;
 
 import java.io.File;
 import java.io.IOException;

@@ -1,4 +1,4 @@
-package streams;
+package streams_miscellaneous;
 
 import java.util.Arrays;
 import java.util.List;
