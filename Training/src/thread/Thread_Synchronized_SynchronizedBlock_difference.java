@@ -28,7 +28,7 @@ class SharedResource {
     public synchronized void synchronizedMethod() {  
         System.out.println("Start of synchronized method by Thread: " + Thread.currentThread().getName());
         try {
-            Thread.sleep(2000); // Simulate some task
+            Thread.sleep(1000); // Simulate some additional task
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -43,14 +43,23 @@ class SharedResource {
      * blocks of the same object concurrently.
      */
     public void synchronizedBlock() {
+    	
+    	System.out.println("non-critical part (before the synchronizedBlock):");
+    	for (int i = 0; i < 2; i++) {System.out.println(i);}
+    	
         synchronized (this) {
-            System.out.println("Start of synchronized block by Thread: " + Thread.currentThread().getName());
+            System.out.println("\nStart of synchronizedBlock by Thread: " + Thread.currentThread().getName());
             try {
-                Thread.sleep(2000); // Simulate some task
+                Thread.sleep(1000); // Simulate some additional task
+            	System.out.println("critical part (the synchronizedBlock):");
+            	for (int i = 3; i < 5; i++) {System.out.println(i);}
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            System.out.println("End of synchronized block by Thread: " + Thread.currentThread().getName());
+            System.out.println("End of synchronizedBlock by Thread: " + Thread.currentThread().getName());
+            
+        	System.out.println("non-critical part (after the synchronizedBlock):");
+        	for (int i = 11; i < 13; i++) {System.out.println(i);}
         }
     }
 }
