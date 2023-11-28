@@ -6,7 +6,7 @@ private static Scanner scanner = new Scanner (System.in);
 
 	public static void main(String[] args) {
 
-		String name = getLetter(scanner);
+		String name = getAllLetters(scanner);
 		System.out.println("Your word is: " + name);
 	
 		scanner.close();
@@ -14,7 +14,7 @@ private static Scanner scanner = new Scanner (System.in);
 	/*
 	 *  getLetter method to validate the input, i.e. to ensure that only letters are entered
 	 */
-    private static String getLetter(Scanner scanner) {
+    private static String getAllLetters(Scanner scanner) {
         System.out.print("Please, enter ...: ");
         String input = scanner.nextLine();
 

@@ -5,20 +5,20 @@ public class Taking_Int_Double_positive_methods_Scanner {
 	static Scanner scanner = new Scanner(System.in);
 
 	public static void main(String[] args) {
+	
 
 		System.out.print("Enter the int. ");
 		// 'inputInt' is the example of the name of the requested posive int
-		int inputInt = getPositiveInt();
+		int inputInt = getPositiveInt(scanner);
 		System.out.println(inputInt);
 
 		System.out.print("Enter the double. ");
 		// 'inputDouble' is the example of the name of the requested positive double
-		double inputDouble = getPositiveDouble();
+		double inputDouble = getPositiveDouble(scanner);
 		System.out.println(inputDouble);
    }
 //-----------------------------------------------------------------------------------------------
-	private static int getPositiveInt() {
-
+	private static int getPositiveInt(Scanner scanner) {
 		int userInput = 0;
 		do {
 			try {
@@ -41,7 +41,7 @@ public class Taking_Int_Double_positive_methods_Scanner {
 		return userInput;
 	}
 //------------------------------------------------------------------------------------------------
-	private static double getPositiveDouble() {
+	private static double getPositiveDouble(Scanner scanner) {
 
 		double userInput = 0;
 		do {
