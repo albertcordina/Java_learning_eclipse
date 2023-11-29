@@ -62,7 +62,7 @@ class Methods {
 		System.out.print("Please, enter your name: ");
 		String input = scanner.nextLine();
 
-		    while (!isAllLetters(input.trim())) {
+		while (!isAllLetters(input.trim())) {
 			System.out.print("Invalid input. Please enter only letters for your name: ");
 			input = scanner.nextLine();
 
@@ -186,9 +186,7 @@ class Methods {
 		return hasUppercase && hasLowercase && hasNumber && hasSymbol;
 	}
 
-	public void createAccount() {
-
-		Scanner scanner = new Scanner(System.in);
+	public void createAccount(Scanner scanner) {
 
 		// Collect the contact phone number of the Applicant
 		System.out.println("\nDear " + Info.name
@@ -216,6 +214,29 @@ class Methods {
 				+ ", thank you for entering your personal details.\nYour account with us has been successfully created."
 				+ "\nPlease, from time to time, check the status of your application!");
 		Main.mainMenu();
+	}
+
+	
+	// The method 'enterPassword': Requests the password from the Applicant (the Applicant has the 3 attempts)
+	public static void enterPassword(Scanner scanner) {
+		int maxAttempts = 3; // the set 3 attempts
+		System.out.println("You have 3 attempts:");
+
+		for (int attempt = 1; attempt <= maxAttempts; attempt++) {
+			System.out.print("Attempt " + attempt + ": Enter your password: ");
+			String userGuess = scanner.nextLine();
+			scanner.nextLine();
+
+			if (userGuess.equals(Info.profiles.get(Info.phoneNumber).getPassword())) {
+				System.out.println("Thank you!");
+				Registered.manageAccount();
+				return; // Exit the program if the password is correct
+			} else {
+				System.out.println("Incorrect input. Try again.");
+			}
+		}
+
+		System.out.println("Sorry, you've run out of attempts.");
 	}
 }
 
@@ -388,8 +409,11 @@ class Student extends Info {
 	static int scholarshipIncome;
 	int extraIncome;
 
+	// The method 'eligibility': Checks if the Applicant is eligible for the
+	// application
 	void eligibility() {
 
+		// The collection of the info
 		System.out.println("\nAre you getting your scholarship as a student?");
 		yesOrNot = yesOrNot(scanner);
 
@@ -406,13 +430,14 @@ class Student extends Info {
 			extraIncome = getPositiveInt(scanner);
 		}
 
+		// The final check if the applicant is not eligible for the application
 		if (scholarshipIncome + extraIncome + monthlySupport >= 2000) { // we check the applicant's income altogether
 			System.out.println("\n\tDear " + name + ",\nThe amount of your income is considered as sufficient and "
 					+ "it fully covers the amount stipulated within this support program.\nThank you for visiting us!");
 			System.exit(0);
 		}
 
-		createAccount(); // If the Applicant is eligible reffer to 'createAccount'
+		createAccount(scanner); // If the Applicant is eligible reffer to 'createAccount'
 	}
 }
 
@@ -421,6 +446,8 @@ class Employed extends Info {
 	int salaryIncome;
 	int extraIncome;
 
+	// The method 'eligibility': Checks if the Applicant is eligible for the
+	// application
 	void eligibility() {
 
 		System.out.println("What is your monthly salary?");
@@ -434,12 +461,13 @@ class Employed extends Info {
 			extraIncome = getPositiveInt(scanner);
 		}
 
+		//
 		if (salaryIncome + extraIncome + monthlySupport >= 2000) { // we check the applicant's income altogether
 			System.out.println("\n\tDear " + name + ",\nThe amount of your income is considered as sufficient and "
 					+ "it fully covers the amount stipulated within this support program.\nThank you for visiting us!");
 			System.exit(0);
 		}
-		createAccount(); // If the Applicant is eligible reffer to 'createAccount'
+		createAccount(scanner); // If the Applicant is eligible reffer to 'createAccount'
 
 	}
 }
@@ -449,6 +477,8 @@ class Unemployed extends Info {
 	int unemployementBenefits;
 	int extraIncome;
 
+	// The method 'eligibility': Checks if the Applicant is eligible for the
+	// application
 	void eligibility() {
 
 		System.out.println("\nAre you getting the monthly unemployement benefits?");
@@ -480,7 +510,7 @@ class Unemployed extends Info {
 					+ "it fully covers the amount stipulated within this support program.\nThank you for visiting us!");
 			System.exit(0);
 		}
-		createAccount(); // If the Applicant is eligible reffer to 'createAccount'
+		createAccount(scanner); // If the Applicant is eligible reffer to 'createAccount'
 	}
 }
 
@@ -489,6 +519,8 @@ class Retired extends Info {
 	int pensionIncome;
 	int extraIncome;
 
+	// The method 'eligibility': Checks if the Applicant is eligible for the
+	// application
 	void eligibility() {
 
 		System.out.println("\nPlease, enter the amount of your monthly pension.");
@@ -508,49 +540,32 @@ class Retired extends Info {
 			System.exit(0);
 		}
 
-		createAccount(); // If the Applicant is eligible reffer to 'createAccount'
+		createAccount(scanner); // If the Applicant is eligible reffer to 'createAccount'
 	}
 }
 
 class Registered extends Info {
 
+	// The method 'accessAccount': Ask for the contact phone number and the password
+	// of the already registered Applicant
 	static void accessAccount() {
-
-		int attempts = 3;
 
 		System.out.println(
 				"\nIn order to enter to your personal account we need your personal/ registered contact phone number.");
 		phoneNumber = getPositiveInt(scanner);
 
-		if (!profiles.containsKey(phoneNumber)) {
-			System.out.println("It looks like you are not registered yet. You are back to the main Menu.\n");
-			Main.mainMenu();
-		}
-
 		if (profiles.containsKey(phoneNumber)) {
-
-			System.out.println("\nThank you.\nPlease, enter the password. You have the 3 attempts.");
-
-			for (int attempt = 1; attempt <= 3; attempt++) {
-			    System.out.print("Enter your password: ");
-
-			    String userInput = scanner.nextLine().trim();
-			    userInput = scanner.nextLine();
-
-			    if (userInput.equals(profiles.get(phoneNumber).getPassword())) {
-			        System.out.println("Thank you for the successful input!");
-			        manageAccount();
-			        return; // exit the method after successful input
-			    } else {
-			        System.out.println("Incorrect input. Attempts left: " + (3 - attempt));
-			    }
-			}
-			System.out.println("Sorry, you've run out of attempts.");
+			System.out.println("\nPlease, enter your password.");
+			enterPassword(scanner);
+		}
+		else {
+			System.out.println("It looks like you are not registered yet. You are back to the main Menu.\n");
 			Main.mainMenu();
 		}
 	}
 
-	// The Menu of the profile
+	// The method 'manageAccount': The Menu of the profile to manage it (i.e. the
+	// amendment of the personal info and check the status of the application)
 	static void manageAccount() {
 
 		System.out.println(name + ", welcome to your account!\n");
@@ -576,14 +591,14 @@ class Registered extends Info {
 					String newName = getAllLetters(scanner);
 					profiles.get(phoneNumber).setName(newName);
 					System.out.println(newName + ", your profile has been successfully updated.");
-					System.out.println(profiles.get(phoneNumber));
+					System.out.println("Your contact phone number: " + phoneNumber + "\n" + profiles.get(phoneNumber));
 					break;
 				case 3:
 					System.out.println("Enter your age.");
 					int newAge = getPositiveInt(scanner);
 					profiles.get(phoneNumber).setAge(newAge);
 					System.out.println(name + ", your profile has been successfully updated.");
-					System.out.println(profiles.get(phoneNumber));
+					System.out.println("Your contact phone number: " + phoneNumber + "\n" + profiles.get(phoneNumber));
 					break;
 				case 4:
 					System.out.println("Enter your personal phone number.");
@@ -600,7 +615,10 @@ class Registered extends Info {
 
 					profiles.remove(phoneNumber); // remove the profile with the old key, i.e., the old phone number
 					System.out.println(name + ", your profile has been successfully updated.");
-					System.out.println(profiles.get(newPhoneNumber)); // print out the updated info of the profile																			// profile
+					System.out.println(
+							"You contact phone number: " + newPhoneNumber + "\n" + profiles.get(newPhoneNumber)); // print
+																													// //
+																													// profile
 					break;
 				case 5:
 					System.out.println("Enter your new password.");
