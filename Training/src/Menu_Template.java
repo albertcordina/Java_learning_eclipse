@@ -10,7 +10,7 @@ public class Menu_Template {
         int choice;
 
         do {
-            System.out.println("\nMenu:\n1. Option 1\n2. Option 2\n3. Option 3\n0. Exit");
+            System.out.println("\nMenu:\n1. Option \n2. Option \n3. Option \n4. Option \n5. Option \n0. Exit");
 
             try {
                 System.out.print("Enter your choice: ");
@@ -26,6 +26,12 @@ public class Menu_Template {
                         break;
                     case 3:
                         System.out.println("option3");
+                        break;
+                    case 4:
+                        System.out.println("option4");
+                        break;
+                    case 5:
+                        System.out.println("option5");
                         break;
                     case 0:
                         System.out.println("Exiting the menu. Goodbye!");
