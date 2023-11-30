@@ -1,3 +1,4 @@
+package taking_Scanner;
 
 import java.util.Scanner; // Alt + Enter;
 

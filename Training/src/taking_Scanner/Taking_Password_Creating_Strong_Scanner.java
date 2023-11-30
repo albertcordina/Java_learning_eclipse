@@ -1,18 +1,19 @@
+package taking_Scanner;
 
 import java.util.Scanner;
 
-public class Taking_Password_Strong_Scanner {
+public class Taking_Password_Creating_Strong_Scanner {
 
     public static void main(String[] args) {
-    	
-        String password = getValidPassword();
+    	Scanner scanner = new Scanner(System.in);
+        String password = getValidPassword(scanner);
         System.out.println("You created a strong password: " + password);
         
     }
 
-    
-    public static String getValidPassword() { // Repeatedly prompts the user until a valid password is entered.
-        Scanner scanner = new Scanner(System.in);
+    // Repeatedly prompts the user until a valid password is entered.
+    public static String getValidPassword(Scanner scanner) { 
+        
 
         while (true) {
             System.out.println("Create a strong password with at least 18 characters, including:");
@@ -22,13 +23,21 @@ public class Taking_Password_Strong_Scanner {
             System.out.println("- At least 2 symbols");
 
             System.out.print("Enter your password: ");
-            String userPassword = scanner.nextLine();
-
-            // Check if the password meets the criteria
-            if (isValidPassword(userPassword)) {
-                return userPassword;
-            } else {
-                System.out.println("Invalid password. Please try again.");
+            try {
+            	/*
+            	 * scanner.next() to read the password input, 
+            	 * and the finally block with scanner.nextLine() is included to clear the buffer. 
+            	 */
+                String userPassword = scanner.next();
+                if (isValidPassword(userPassword)) {
+                    return userPassword;
+                } else {
+                    System.out.println("Invalid password. Please try again.");
+                }
+            } catch (Exception e) {
+                System.out.println("An error occurred. Please try again.");
+            } finally {
+                scanner.nextLine(); // Clear the buffer
             }
         }
     }

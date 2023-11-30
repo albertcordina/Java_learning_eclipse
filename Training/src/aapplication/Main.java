@@ -9,15 +9,18 @@ public class Main {
 
 	public static void main(String[] args) {
 
+		// The Welcome message
 		System.out.println("Dear applicant, tank you contacting us,\nwe are happy to help you with your application!");
-		mainMenu();
+		Menu(); // Call the method 'Menu' below
 	}
 
-	public static void mainMenu() {
+	public static void Menu() { // Starts and Runs the whole project
 
-		Info collectionInfo = new Info();
+		Info info = new Info();
 		Registered registered = new Registered();
+		
 		Scanner scanner = new Scanner(System.in);
+		
 		int choice;
 
 		do {
@@ -31,10 +34,10 @@ public class Main {
 
 				switch (choice) {
 				case 1:
-					collectionInfo.collection();
+					info.collection(); // Calls the method 'collection' in the Class 'Info'
 					break;
-				case 2:
-					registered.accessAccount();
+				case 2:                          // For those, who are already registered
+					registered.accessAccount(); // Calls the method 'accessAccount' in the Class 'Registered'
 					break;
 				case 0:
 					System.out.println("\nThank you for visiting us!");
@@ -52,31 +55,46 @@ public class Main {
 			}
 		} while (choice != 0);
 		scanner.close();
+		System.exit(0);
 	}
 }
 
-class Methods {
+class Methods { //  Contains almost all methods of the project
 
-	// Takes only the letters from the Applicant's input
+	// Method 'getAllLetters': Takes only the letters from the Applicant's input
 	public static String getAllLetters(Scanner scanner) {
-		System.out.print("Please, enter your name: ");
-		String input = scanner.nextLine();
+		
+        while (true) {
+            System.out.print("Please, enter your name: ");
 
-		while (!isAllLetters(input.trim())) {
-			System.out.print("Invalid input. Please enter only letters for your name: ");
-			input = scanner.nextLine();
-
-		}
-		return input.trim();
-	}
-
-	private static boolean isAllLetters(String input) {
-		return !input.isEmpty() && input.chars().allMatch(Character::isLetter);
-	}
+            try {
+            	/* the input logic to use scanner.next() instead of scanner.nextLine(): i.e.
+            	 * to ensure that the newline character does not interfere with subsequent inputs.
+            	 */
+                String input = scanner.next();
+                if (isAllLetters(input.trim())) {
+                	// trim method is used to remove leading and trailing whitespace from the input.
+                    return input.trim();
+                } else {
+                    System.out.println("Invalid input. Please enter only letters for your name.");
+                }
+            } catch (Exception e) {
+                System.out.println("An error occurred. Please try again.");
+            } finally {
+                scanner.nextLine(); // Clear the buffer
+            }
+        }
+    }
+	// the isAllLetters method checks whether the input consists only of letters (affiliated with the 'getAllLetters' above).
+    private static boolean isAllLetters(String input) {
+        return !input.isEmpty() && input.chars().allMatch(Character::isLetter);
+    }
 
 	// Takes a positive number from the Applicant
 	public static int getPositiveInt(Scanner scanner) {
+		
 		int userInput = 0;
+		
 		do {
 			try {
 				System.out.print("Please, enter: ");
@@ -112,24 +130,32 @@ class Methods {
 	// (including a country code)
 	public static int getValidPhoneNumber(Scanner scanner) {
 
-		while (true) {
-			System.out.print("Enter a number with 7 to 15 digits: ");
-			String userInput = scanner.nextLine();
+		int validPhoneNumber;
 
-			// Check if the input is a valid integer
-			if (userInput.matches("\\d+")) {
+		do {
+			System.out.print("Enter a number with 7 to 15 digits: ");
+
+			try {
+				// the input logic to use scanner.next() instead of scanner.nextLine(): i.e.
+				// to ensure that the newline character does not interfere with subsequent inputs.
+				validPhoneNumber = Integer.parseInt(scanner.next());
 				// Check if the number of digits is between 7 and 15 (inclusive)
-				if (userInput.length() >= 7 && userInput.length() <= 15) {
-					return Integer.parseInt(userInput);
+				if (String.valueOf(validPhoneNumber).length() >= 7 && String.valueOf(validPhoneNumber).length() <= 15) {
+					break; // Exit the loop if the input is valid
 				} else {
 					System.out.println("Number must have 7 to 15 digits. Try again.");
 				}
-			} else {
+			} catch (NumberFormatException e) {
 				System.out.println("Invalid input. Please enter a valid number.");
+				// Clear the buffer
+				scanner.nextLine();
 			}
-		}
+		} while (true);
+
+		return validPhoneNumber;
 	}
 
+	
 	/*
 	 * Takes the password from the Applicant corresponding to the requirments (i.e.
 	 * at least 12 characters long and has the combination of at least one uppercase
@@ -144,17 +170,24 @@ class Methods {
 							+ "\n- At least one lowercase letter\n- At least one number\n- At least one symbol");
 
 			System.out.print("Enter your password: ");
-			String userPassword = scanner.nextLine();
-
-			if (isValidPassword(userPassword)) { // Check if the password meets the criteria
-				return userPassword;
-			} else {
-				System.out.println("Invalid password. Please try again.");
+			// the password input logic to use scanner.next() instead of scanner.nextLine(): i.e.
+			// to ensure that the newline character does not interfere with subsequent inputs.
+			try {
+				String userPassword = scanner.next();
+				if (isValidPassword(userPassword)) {
+					return userPassword;
+				} else {
+					System.out.println("Invalid password. Please try again.\n");
+				}
+			} catch (Exception e) {
+				System.out.println("An error occurred. Please try again.");
+			} finally {
+				scanner.nextLine(); // Clear the buffer
 			}
 		}
 	}
-
-	public static boolean isValidPassword(String password) { // Checks the validation of the entered password
+    // Checks the validation of the entered password (affiliated with the 'getValidPassword' above)
+	public static boolean isValidPassword(String password) { 
 
 		// Check if the password is at least 12 characters long
 		if (password.length() < 12) {
@@ -168,11 +201,11 @@ class Methods {
 		boolean hasSymbol = false;
 
 		for (char ch : password.toCharArray()) {
-			if (Character.isUpperCase(ch)) {
+			if (Character.isUpperCase(ch)) { // Check if the password contains an UpperCase
 				hasUppercase = true;
-			} else if (Character.isLowerCase(ch)) {
+			} else if (Character.isLowerCase(ch)) { // Check if the password contains a LowerCase
 				hasLowercase = true;
-			} else if (Character.isDigit(ch)) {
+			} else if (Character.isDigit(ch)) { // Check if the password contains a Digit
 				hasNumber = true;
 			} else {
 				// You can customize the symbols according to your requirements
@@ -186,6 +219,8 @@ class Methods {
 		return hasUppercase && hasLowercase && hasNumber && hasSymbol;
 	}
 
+	
+	// The method 'createAccount': Ask the Applicant for the contact phone number and the password and create the profile
 	public void createAccount(Scanner scanner) {
 
 		// Collect the contact phone number of the Applicant
@@ -194,87 +229,122 @@ class Methods {
 				+ "In order to create your personal account, we need to have your personal contact phone number.");
 		Info.phoneNumber = getValidPhoneNumber(scanner);
 
-		if (Info.profiles.containsKey(Info.phoneNumber)) { // If the phone number is in the list, send the Applicant to
-															// the
-															// Class Registered
+		// If the phone number is in the list, send the Applicant to the Class Registered
+		if (Info.profiles.containsKey(Info.phoneNumber)) { 
 			System.out.println("It looks that you are already registered.");
 			Registered.accessAccount();
 		}
-
 		// Create the password
 		System.out.println("\nThank you!\nPlease, create your password.");
 		Info.password = getValidPassword(scanner);
-
-		Info.profiles.put(Info.phoneNumber, new Info(Info.name, Info.age, Info.password, Info.status)); // placing the
-																										// collected
-																										// info
-		// into the 'list'
+		
+		// Place the collected info into the 'profiles'																										
+		Info.profiles.put(Info.phoneNumber, new Info(Info.name, Info.age, Info.occupation, Info.overallIncome, Info.password, Info.statusOfApplication)); 
 
 		System.out.println(Info.name
 				+ ", thank you for entering your personal details.\nYour account with us has been successfully created."
-				+ "\nPlease, from time to time, check the status of your application!");
-		Main.mainMenu();
+				+ "\nPlease, use your phone number as a login to your personal profile, and from time to time, "
+				+ "check the status of your application!");
+		Main.Menu();
 	}
 
 	
-	// The method 'enterPassword': Requests the password from the Applicant (the Applicant has the 3 attempts)
+	// The method 'enterPassword': Requests the password from the Applicant with the 3 attempts
 	public static void enterPassword(Scanner scanner) {
+		
 		int maxAttempts = 3; // the set 3 attempts
+		
 		System.out.println("You have 3 attempts:");
 
-		for (int attempt = 1; attempt <= maxAttempts; attempt++) {
-			System.out.print("Attempt " + attempt + ": Enter your password: ");
-			String userGuess = scanner.nextLine();
-			scanner.nextLine();
+        for (int attempt = 1; attempt <= maxAttempts; attempt++) {
+            System.out.print("Attempt " + attempt + ": Enter your password: ");
 
-			if (userGuess.equals(Info.profiles.get(Info.phoneNumber).getPassword())) {
-				System.out.println("Thank you!");
-				Registered.manageAccount();
-				return; // Exit the program if the password is correct
-			} else {
-				System.out.println("Incorrect input. Try again.");
-			}
-		}
+            try {
+            	// the input logic to use scanner.next() instead of scanner.nextLine(): i.e.
+    			// to ensure that the newline character does not interfere with subsequent inputs.
+                String userGuess = scanner.next();
+                if (userGuess.equals(Info.profiles.get(Info.phoneNumber).getPassword())) {
+                    System.out.println("Thank you!");
+                    Registered.manageAccount();
+                    return;
+                } else {
+                    System.out.println("Incorrect input. Try again.");
+                }
+            } catch (Exception e) {
+                System.out.println("An error occurred. Please try again.");
+            } finally {
+                scanner.nextLine(); // Clear the buffer
+            }
+        }
 
-		System.out.println("Sorry, you've run out of attempts.");
-	}
+        System.out.println("Sorry, you've run out of attempts.");
+    }
 }
 
 class Info extends Methods {
 
 	protected static String name;
-	static int age;
-	static String password;
-	static String status;
-	static int phoneNumber;
-	static int monthlySupport;
-	static int monthlyPension;
-	static String yesOrNot;
+	protected static int age;
+	protected static String password;
+	protected static String statusOfApplication;
+	protected static String occupation;
+	protected static int phoneNumber;
+	
+	protected static int monthlySupport;
+	protected static int monthlyPension;
+	protected static int monthlyExtraIncome;
+	protected static int monthlyScholarshipIncome;
+	protected static int monthlySalaryIncome;
+	protected static int monthlyUnemployementBenefits;
+
+	protected static int overallIncome = monthlySupport + monthlyPension + monthlyExtraIncome +
+			monthlyScholarshipIncome + monthlySalaryIncome + monthlyUnemployementBenefits;
+	protected static String yesOrNot;
 
 	static Scanner scanner = new Scanner(System.in);
 	static Map<Integer, Info> profiles = new HashMap<>();
-
-	public Info(String name, int age, String password, String status) { // constructor
+    
+	// The constructor for the HashMap 'profiles'
+	public Info(String name, int age, String occupation, int overallIncome, String password, String statusOfApplication) { 
 		this.name = name;
 		this.age = age;
+		this.occupation = occupation;
+		this.overallIncome = overallIncome;
 		this.password = password;
-		this.status = status;
+		this.statusOfApplication = statusOfApplication;
 	}
 
-	public Info() {
-	}
+	public Info() {} // The constructor for sharing its Info with other Classes
 
-	public String toString() {
-		return "\nYour name: " + name + "\nYour age: " + age + "\nThe password to your account: " + password
-				+ "\nThe status of the application: " + status;
-	} // toString method
+	public String toString() { // toString method for printing out the profile(s) of the HashMap 'profiles'
+		return "\nYour name: " + name + "\nYour age: " + age + "\nYour current occupation: " + occupation + "\nYour overall income: " 
+			+ overallIncome + "\nThe password to your account: " + password + "\nThe status of your application: " + statusOfApplication;
+	} 
 
+	// Getters and Setters to operate with the values of the variables
+	
 	public String getName() {
 		return name;
 	}
-
+	
 	public void setName(String name) {
 		Info.name = name;
+	}
+	
+	public static String getOccupation() {
+		return occupation;
+	}
+
+	public static void setOccupation(String occupation) {
+		Info.occupation = occupation;
+	}
+
+	public static int getOverallIncome() {
+		return overallIncome;
+	}
+
+	public static void setOverallIncome(int overallIncome) {
+		Info.overallIncome = overallIncome;
 	}
 
 	public int getAge() {
@@ -294,21 +364,30 @@ class Info extends Methods {
 	}
 
 	public String getStatus() {
-		return status;
+		return statusOfApplication;
 	}
 
 	public void setStatus(String status) {
-		Info.status = status;
+		Info.statusOfApplication = status;
 	}
 
 	public int getPhoneNumber() {
 		return phoneNumber;
 	}
 
+	/*
+	 * The method 'collection' collects the basic information from the Applicant:
+	 * 
+	 * 1. Name;
+	 * 2. Age;
+	 * 3. If the Applicant is getting a current support from the government;
+	 * 4. Asks about a government pention (if the Applicant is over 67 years old);
+	 * 5. Asks about the Occupational status of the Applicant (i.e. student, employed, unemployed, retired)
+	 *    and calls the corresponding methods of the corresponding Classes;
+	 */	
 	public static void collection() {
 
-		System.out.println(
-				"\nThank you!\nFor a further review, we need some information from you.\nIt won't take a long time.\n");
+		System.out.println("\nThank you!\nFor a further review, we need some information from you.\n");
 
 		// collect the basic personal information from the Applicant (i.e. name, age)
 		name = getAllLetters(scanner);
@@ -340,8 +419,11 @@ class Info extends Methods {
 					"\nAccording to your age, you are eligible for getting a pension.\nHave you applied for your pension?");
 			yesOrNot = yesOrNot(scanner);
 
+			// If the Applicant is on pension, call the method 'eligibility' in the subclass 'Retired'
 			if (yesOrNot.equals("yes")) {
 				retired.eligibility();
+				
+			// If the Applicant has not applied for the pension, reffer the Applicant to the appropriate Social Services
 			} else {
 				System.out.println("\n\tDear " + name
 						+ ",\nAccording to your age and the regulation of the social service support you are "
@@ -351,13 +433,13 @@ class Info extends Methods {
 				System.exit(0);
 
 			}
-		}
-
-		// The Occupational status of the Applicant
+		}	
+		// Instances of the appropriate Classes for the Menu below
 		Student student = new Student();
 		Employed employed = new Employed();
 		Unemployed unemployed = new Unemployed();
-
+		
+        // The Menu of identifying the Occupational status of the Applicant
 		int option;
 
 		do {
@@ -383,7 +465,7 @@ class Info extends Methods {
 					retired.eligibility();
 					break;
 				case 5:
-					Main.mainMenu();
+					Main.Menu();
 					break;
 				case 0:
 					System.out.println("Thank you for visiting us!");
@@ -406,88 +488,96 @@ class Info extends Methods {
 
 class Student extends Info {
 
-	static int scholarshipIncome;
-	int extraIncome;
 
-	// The method 'eligibility': Checks if the Applicant is eligible for the
-	// application
+	// The method 'eligibility': Checks if the Applicant is eligible for the application
 	void eligibility() {
 
 		// The collection of the info
 		System.out.println("\nAre you getting your scholarship as a student?");
 		yesOrNot = yesOrNot(scanner);
 
+		// Check if the Applicant is getting the scoolarship
 		if (yesOrNot.equals("yes")) {
 			System.out.println("\nPlease, enter the monthly amount of your scholarship.");
-			scholarshipIncome = getPositiveInt(scanner);
+			monthlyScholarshipIncome = getPositiveInt(scanner);
 		}
-
+		// Check if the Applicant is having an extra income
 		System.out.println("Are you having an extra monthly income?");
 		yesOrNot = yesOrNot(scanner);
 
+		// If yes, Collect the amount of the exta monthly income
 		if (yesOrNot.equals("yes")) {
 			System.out.println("\nPlease, enter the monthly amount of your extra income.");
-			extraIncome = getPositiveInt(scanner);
+			monthlyExtraIncome = getPositiveInt(scanner);
 		}
-
-		// The final check if the applicant is not eligible for the application
-		if (scholarshipIncome + extraIncome + monthlySupport >= 2000) { // we check the applicant's income altogether
+		/*
+		 * Check if the applicant's overall income reaches the 2000 Euros:
+		 *   if the amount exceeds the 2000 Euros -> Inform the Applicant about it;
+		 *   if the amount is below the 200 Euros -> Call the method 'createAccount' in the superclass 'Methods'
+		 */
+		if (overallIncome >= 2000) { // we check the applicant's income altogether
 			System.out.println("\n\tDear " + name + ",\nThe amount of your income is considered as sufficient and "
 					+ "it fully covers the amount stipulated within this support program.\nThank you for visiting us!");
 			System.exit(0);
 		}
-
-		createAccount(scanner); // If the Applicant is eligible reffer to 'createAccount'
+		// Call the method 'createAccount' If the Applicant is eligible reffer to 'createAccount'
+		createAccount(scanner); 
 	}
 }
 
 class Employed extends Info {
 
-	int salaryIncome;
-	int extraIncome;
 
-	// The method 'eligibility': Checks if the Applicant is eligible for the
-	// application
+	// The method 'eligibility': Checks if the Applicant is eligible for the application
 	void eligibility() {
 
+		// Ask the Applicant about the monthly salary
 		System.out.println("What is your monthly salary?");
-		salaryIncome = getPositiveInt(scanner);
+		monthlySalaryIncome = getPositiveInt(scanner);
 
+		// Check if the Applicant is having an extra income
 		System.out.println("Are you having an extra monthly income (besides the salary)?");
 		yesOrNot = yesOrNot(scanner);
 
+		// If yes, Collect the amount of the exta monthly income
 		if (yesOrNot.equals("yes")) {
 			System.out.println("\nPlease, enter the amount of your extra income.");
-			extraIncome = getPositiveInt(scanner);
+			monthlyExtraIncome = getPositiveInt(scanner);
 		}
-
-		//
-		if (salaryIncome + extraIncome + monthlySupport >= 2000) { // we check the applicant's income altogether
+		/*
+		 * Check if the applicant's overall income reaches the 2000 Euros:
+		 *   if the amount exceeds the 2000 Euros -> Inform the Applicant about it;
+		 *   if the amount is below the 200 Euros -> Call the method 'createAccount' in the superclass 'Methods'
+		 */
+		if (overallIncome >= 2000) { // we check the applicant's income altogether
 			System.out.println("\n\tDear " + name + ",\nThe amount of your income is considered as sufficient and "
 					+ "it fully covers the amount stipulated within this support program.\nThank you for visiting us!");
 			System.exit(0);
 		}
-		createAccount(scanner); // If the Applicant is eligible reffer to 'createAccount'
-
+		// Call the method 'createAccount' If the Applicant is eligible reffer to 'createAccount'
+		createAccount(scanner); 
 	}
 }
 
+
 class Unemployed extends Info {
 
-	int unemployementBenefits;
-	int extraIncome;
-
-	// The method 'eligibility': Checks if the Applicant is eligible for the
-	// application
+	// The method 'eligibility': Checks if the Applicant is eligible for the application
 	void eligibility() {
 
+		// Ask the Applicant about the monthly unemployment benefits
 		System.out.println("\nAre you getting the monthly unemployement benefits?");
 		yesOrNot = yesOrNot(scanner);
 
+		// Collect the amount of the monthly unemployment benefits
 		if (yesOrNot.equals("yes")) {
 			System.out.println("\nPlease, enter the amount of the monthly unemployment benefits.");
-			unemployementBenefits = getPositiveInt(scanner);
+			monthlyUnemployementBenefits = getPositiveInt(scanner);
 		}
+		
+		/* If the Applicant has not applied for the unemplyment benefits yet, 
+		 * reffer the Applicant to the appropriate Social Services.
+		 */	
 		if (yesOrNot.equals("not")) {
 			System.out.println("\n\tDear " + name
 					+ ",\nAccording to the regulation of the social service support you are "
@@ -496,58 +586,69 @@ class Unemployed extends Info {
 			System.exit(0);
 		}
 
+		// Check if the Applicant is having an extra income
 		System.out.println("Are you having an extra monthly income?");
 		yesOrNot = yesOrNot(scanner);
 
+		// If yes, Collect the amount of the exta monthly income
 		if (yesOrNot.equals("yes")) {
 			System.out.println("\nPlease, enter the amount of your extra income.");
-			extraIncome = getPositiveInt(scanner);
-		}
-
-		if (unemployementBenefits + extraIncome + monthlySupport >= 2000) { // we check the applicant's income
-																			// altogether
+			monthlyExtraIncome = getPositiveInt(scanner);
+		}	
+		/*
+		 * Check if the applicant's overall income reaches the 2000 Euros:
+		 *   if the amount exceeds the 2000 Euros -> Inform the Applicant about it;
+		 *   if the amount is below the 200 Euros -> Call the method 'createAccount' in the superclass 'Methods'
+		 */
+		if (overallIncome >= 2000) { 																			
 			System.out.println("\n\tDear " + name + ",\nThe amount of your income is considered as sufficient and "
 					+ "it fully covers the amount stipulated within this support program.\nThank you for visiting us!");
 			System.exit(0);
 		}
-		createAccount(scanner); // If the Applicant is eligible reffer to 'createAccount'
+		// Call the method 'createAccount' If the Applicant is eligible reffer to 'createAccount'
+		createAccount(scanner); 
 	}
 }
 
 class Retired extends Info {
 
-	int pensionIncome;
-	int extraIncome;
 
-	// The method 'eligibility': Checks if the Applicant is eligible for the
-	// application
+	// The method 'eligibility': Checks if the Applicant is eligible for the application
 	void eligibility() {
 
 		System.out.println("\nPlease, enter the amount of your monthly pension.");
-		pensionIncome = getPositiveInt(scanner);
+		monthlyPension = getPositiveInt(scanner); 
 
+		// Check if the Applicant is having an extra income
 		System.out.println("\nAre you having an extra monthly income (besides the pension)?");
 		yesOrNot = yesOrNot(scanner);
 
+		// If yes, Collect the amount of the exta monthly income
 		if (yesOrNot.equals("yes")) {
 			System.out.println("\nPlease, enter the amount of your extra income.");
-			extraIncome = getPositiveInt(scanner);
+			monthlyExtraIncome = getPositiveInt(scanner);
 		}
-
-		if (pensionIncome + extraIncome + monthlySupport >= 2000) { // we check the applicant's income altogether
+		/*
+		 * Check if the applicant's overall income reaches the 2000 Euros:
+		 *   if the amount exceeds the 2000 Euros -> Inform the Applicant about it;
+		 *   if the amount is below the 200 Euros -> Call the method 'createAccount' in the superclass 'Methods'
+		 */
+		if (overallIncome >= 2000) { // we check the applicant's income altogether 
 			System.out.println("\n\tDear " + name + ",\nThe amount of your income is considered as sufficient and "
 					+ "it fully covers the amount stipulated within this support program.\nThank you for visiting us!");
 			System.exit(0);
 		}
-
-		createAccount(scanner); // If the Applicant is eligible reffer to 'createAccount'
+		// Call the method 'createAccount' If the Applicant is eligible reffer to 'createAccount'
+		createAccount(scanner); 
 	}
 }
 
 class Registered extends Info {
 
-	// The method 'accessAccount': Ask for the contact phone number and the password
-	// of the already registered Applicant
+	/*
+	 * The method 'accessAccount': Ask for the contact phone number and the password
+	 * of the already registered Applicant
+	 */
 	static void accessAccount() {
 
 		System.out.println(
@@ -557,15 +658,16 @@ class Registered extends Info {
 		if (profiles.containsKey(phoneNumber)) {
 			System.out.println("\nPlease, enter your password.");
 			enterPassword(scanner);
-		}
-		else {
+		} else {
 			System.out.println("It looks like you are not registered yet. You are back to the main Menu.\n");
-			Main.mainMenu();
+			Main.Menu();
 		}
 	}
 
-	// The method 'manageAccount': The Menu of the profile to manage it (i.e. the
-	// amendment of the personal info and check the status of the application)
+	/*
+	 * The method 'manageAccount': The Menu of the profile to manage it (i.e. the
+	 * amendment of the personal info and check the status of the application)
+	 */
 	static void manageAccount() {
 
 		System.out.println(name + ", welcome to your account!\n");
@@ -587,21 +689,21 @@ class Registered extends Info {
 					System.out.println(profiles.get(phoneNumber).getStatus());
 					break;
 				case 2:
-					System.out.println("Enter your new name.");
+					System.out.println("\nEnter your new name.");
 					String newName = getAllLetters(scanner);
 					profiles.get(phoneNumber).setName(newName);
 					System.out.println(newName + ", your profile has been successfully updated.");
 					System.out.println("Your contact phone number: " + phoneNumber + "\n" + profiles.get(phoneNumber));
 					break;
 				case 3:
-					System.out.println("Enter your age.");
+					System.out.println("\nEnter your age.");
 					int newAge = getPositiveInt(scanner);
 					profiles.get(phoneNumber).setAge(newAge);
 					System.out.println(name + ", your profile has been successfully updated.");
 					System.out.println("Your contact phone number: " + phoneNumber + "\n" + profiles.get(phoneNumber));
 					break;
 				case 4:
-					System.out.println("Enter your personal phone number.");
+					System.out.println("\nEnter your new personal phone number.");
 					int newPhoneNumber = getValidPhoneNumber(scanner);
 
 					if (profiles.containsKey(newPhoneNumber)) {
@@ -611,34 +713,36 @@ class Registered extends Info {
 
 					profiles.put(newPhoneNumber,
 							new Info(profiles.get(phoneNumber).getName(), profiles.get(phoneNumber).getAge(),
+									profiles.get(phoneNumber).getOccupation(), profiles.get(phoneNumber).getOverallIncome(),
 									profiles.get(phoneNumber).getPassword(), profiles.get(phoneNumber).getStatus()));
 
 					profiles.remove(phoneNumber); // remove the profile with the old key, i.e., the old phone number
 					System.out.println(name + ", your profile has been successfully updated.");
 					System.out.println(
-							"You contact phone number: " + newPhoneNumber + "\n" + profiles.get(newPhoneNumber)); // print
+							"\nYour contact phone number: " + newPhoneNumber + profiles.get(newPhoneNumber)); // print
 																													// //
 																													// profile
 					break;
 				case 5:
-					System.out.println("Enter your new password.");
+					System.out.println("\nEnter your new password.");
 					String newPassword = getValidPassword(scanner);
 					profiles.get(phoneNumber).setPassword(newPassword);
 					System.out.println(name + ", your profile has been successfully updated.");
 					System.out.println(profiles.get(phoneNumber));
-					Main.mainMenu();
+					Main.Menu();
 					break;
 				case 6:
 					System.out.println(name + ", your profile has been removed.");
 					profiles.remove(phoneNumber);
-					Main.mainMenu();
+					Main.Menu();
 					break;
 				case 7:
-					Main.mainMenu();
+					Main.Menu();
 					break;
 				case 0:
 					System.out.println("Thank you for your session!");
-					break;
+					System.exit(0);
+					break;					
 				default:
 					System.out.println("Invalid choice. Please enter a valid option.");
 					break;
