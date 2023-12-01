@@ -114,13 +114,13 @@ class Methods { //  Contains almost all methods of the project
 	}
 
 	// Takes 'yes' or 'not' response from the applicant
-	public static String yesOrNot(Scanner scanner) {
+	public static String yesOrNo(Scanner scanner) {
 
-		System.out.print("Please, enter 'yes' or 'not': ");
+		System.out.print("Please, enter 'yes' or 'no': ");
 		String input = scanner.next().toLowerCase();
 
-		while (!input.equals("yes") && !input.equals("not")) {
-			System.out.print("Please, enter 'yes' or 'not': ");
+		while (!input.equals("yes") && !input.equals("no")) {
+			System.out.print("Please, enter 'yes' or 'no': ");
 			input = scanner.next().toLowerCase();
 		}
 		return input;
@@ -221,7 +221,7 @@ class Methods { //  Contains almost all methods of the project
 
 	
 	// The method 'createAccount': Ask the Applicant for the contact phone number and the password and create the profile
-	public void createAccount(Scanner scanner) {
+	public static void createAccount(Scanner scanner) {
 
 		// Collect the contact phone number of the Applicant
 		System.out.println("\nDear " + Info.name
@@ -243,9 +243,9 @@ class Methods { //  Contains almost all methods of the project
 
 		System.out.println(Info.name
 				+ ", thank you for entering your personal details.\nYour account with us has been successfully created."
-				+ "\nPlease, use your phone number as a login to your personal profile, and from time to time, "
-				+ "check the status of your application!");
-		Main.Menu();
+				+ "\nPlease, use your phone number as the login to your personal profile.\n We also advise you to check the status of "
+				+ "your application and add any required info (e.g. the results of Social Security department regarding your "
+				+ "unemployment benefits/ pension, e.t.c.) in the section: 'The status of the application'.\nThe Team of the 'Support Program'.");
 	}
 
 	
@@ -299,7 +299,7 @@ class Info extends Methods {
 
 	protected static int overallIncome = monthlySupport + monthlyPension + monthlyExtraIncome +
 			monthlyScholarshipIncome + monthlySalaryIncome + monthlyUnemployementBenefits;
-	protected static String yesOrNot;
+	protected static String yesOrNo;
 
 	static Scanner scanner = new Scanner(System.in);
 	static Map<Integer, Info> profiles = new HashMap<>();
@@ -397,10 +397,10 @@ class Info extends Methods {
 		age = getPositiveInt(scanner);
 
 		// Ask the Applicant about a current support
-		System.out.println("\nAre you getting a current support from the government?");
-		yesOrNot = yesOrNot(scanner);
+		System.out.println("\nAre you getting any other current support from the government?");
+		yesOrNo = yesOrNo(scanner);
 
-		if (yesOrNot.equals("yes")) {
+		if (yesOrNo.equals("yes")) {
 			System.out
 					.println("\nThank you!\nWhat is the monthly amount you are currently getting from the government?");
 			monthlySupport = getPositiveInt(scanner);
@@ -413,24 +413,38 @@ class Info extends Methods {
 		}
 
 		// Ask the Applicant who are over 67 years old about the pension
-		Retired retired = new Retired();
+		Retired retired = new Retired(); // create an instance of the subclass 'Retired'
 		if (age >= 67) {
 			System.out.println(
 					"\nAccording to your age, you are eligible for getting a pension.\nHave you applied for your pension?");
-			yesOrNot = yesOrNot(scanner);
+			yesOrNo = yesOrNo(scanner);
 
 			// If the Applicant is on pension, call the method 'eligibility' in the subclass 'Retired'
-			if (yesOrNot.equals("yes")) {
+			if (yesOrNo.equals("yes")) {
 				retired.eligibility();
 				
 			// If the Applicant has not applied for the pension, reffer the Applicant to the appropriate Social Services
 			} else {
 				System.out.println("\n\tDear " + name
 						+ ",\nAccording to your age and the regulation of the social service support you are "
-						+ "eligible for the retirement pension. \nTherefore, we advise you fist to contact your local social servise for "
-						+ "clarification of this subject and then contact us again.\nThank you for visiting us!");
+						+ "eligible for the retirement pension. \nTherefore, we advise you to contact your local social servise for "
+						+ "clarification of this subject and then inform us about the outcome.\n");
 
-				System.exit(0);
+				// Check if the Applicant is having an extra income
+				System.out.println("Are you having an extra monthly income (e.g. from your part or full time job, e.t.c.)?");
+				yesOrNo = yesOrNo(scanner);
+
+				// If yes, Collect the amount of the exta monthly income
+				if (yesOrNo.equals("yes")) {
+					System.out.println("\nPlease, enter the amount of your extra income.");
+					monthlyExtraIncome = getPositiveInt(scanner);
+				}
+				
+				// Call the method 'createAccount' If the Applicant is eligible reffer to 'createAccount'
+				createAccount(scanner); 
+		        // Place the 'occupation' of the Applicant in the already created profile via the 'createAccount' method
+				profiles.put(phoneNumber, new Info (name, age, "Retired (needs outcome from Social Service)", overallIncome, password, statusOfApplication));
+				Main.Menu(); // After gathering the info and creating the profile, send the Applicant to the main Menu
 
 			}
 		}	
@@ -494,19 +508,19 @@ class Student extends Info {
 
 		// The collection of the info
 		System.out.println("\nAre you getting your scholarship as a student?");
-		yesOrNot = yesOrNot(scanner);
+		yesOrNo = yesOrNo(scanner);
 
 		// Check if the Applicant is getting the scoolarship
-		if (yesOrNot.equals("yes")) {
+		if (yesOrNo.equals("yes")) {
 			System.out.println("\nPlease, enter the monthly amount of your scholarship.");
 			monthlyScholarshipIncome = getPositiveInt(scanner);
 		}
 		// Check if the Applicant is having an extra income
 		System.out.println("Are you having an extra monthly income?");
-		yesOrNot = yesOrNot(scanner);
+		yesOrNo = yesOrNo(scanner);
 
 		// If yes, Collect the amount of the exta monthly income
-		if (yesOrNot.equals("yes")) {
+		if (yesOrNo.equals("yes")) {
 			System.out.println("\nPlease, enter the monthly amount of your extra income.");
 			monthlyExtraIncome = getPositiveInt(scanner);
 		}
@@ -522,6 +536,9 @@ class Student extends Info {
 		}
 		// Call the method 'createAccount' If the Applicant is eligible reffer to 'createAccount'
 		createAccount(scanner); 
+        // Place the 'occupation' of the Applicant in the already created profile via the 'createAccount' method
+		profiles.put(phoneNumber, new Info (name, age, "Student", overallIncome, password, statusOfApplication));
+		Main.Menu(); // After gathering the info and creating the profile, send the Applicant to the main Menu
 	}
 }
 
@@ -537,10 +554,10 @@ class Employed extends Info {
 
 		// Check if the Applicant is having an extra income
 		System.out.println("Are you having an extra monthly income (besides the salary)?");
-		yesOrNot = yesOrNot(scanner);
+		yesOrNo = yesOrNo(scanner);
 
 		// If yes, Collect the amount of the exta monthly income
-		if (yesOrNot.equals("yes")) {
+		if (yesOrNo.equals("yes")) {
 			System.out.println("\nPlease, enter the amount of your extra income.");
 			monthlyExtraIncome = getPositiveInt(scanner);
 		}
@@ -556,6 +573,10 @@ class Employed extends Info {
 		}
 		// Call the method 'createAccount' If the Applicant is eligible reffer to 'createAccount'
 		createAccount(scanner); 
+        // Place the 'occupation' of the Applicant in the already created profile via the 'createAccount' method
+		profiles.put(phoneNumber, new Info (name, age, "Employed", overallIncome, password, statusOfApplication));
+		Main.Menu(); // After gathering the info and creating the profile, send the Applicant to the main Menu
+
 	}
 }
 
@@ -567,10 +588,10 @@ class Unemployed extends Info {
 
 		// Ask the Applicant about the monthly unemployment benefits
 		System.out.println("\nAre you getting the monthly unemployement benefits?");
-		yesOrNot = yesOrNot(scanner);
+		yesOrNo = yesOrNo(scanner);
 
 		// Collect the amount of the monthly unemployment benefits
-		if (yesOrNot.equals("yes")) {
+		if (yesOrNo.equals("yes")) {
 			System.out.println("\nPlease, enter the amount of the monthly unemployment benefits.");
 			monthlyUnemployementBenefits = getPositiveInt(scanner);
 		}
@@ -578,35 +599,42 @@ class Unemployed extends Info {
 		/* If the Applicant has not applied for the unemplyment benefits yet, 
 		 * reffer the Applicant to the appropriate Social Services.
 		 */	
-		if (yesOrNot.equals("not")) {
-			System.out.println("\n\tDear " + name
-					+ ",\nAccording to the regulation of the social service support you are "
-					+ "eligible for the unemployment benefits. \nTherefore, we advise you fist to contact your local unemployement"
-					+ " servise for clarification of this subject and then contact us again.\nThank you for visiting us!");
+		if (yesOrNo.equals("not")) {
+			System.out.println("\n" + name +
+					"\n, according to the regulation of the social service support you are "
+					+ "eligible for the unemployment benefits. \nTherefore, we advise you also to contact your local unemployement"
+					+ " servise for clarification of this subject and then inform us about the outcome.");
 			System.exit(0);
 		}
-
+		
 		// Check if the Applicant is having an extra income
 		System.out.println("Are you having an extra monthly income?");
-		yesOrNot = yesOrNot(scanner);
+		yesOrNo = yesOrNo(scanner);
 
 		// If yes, Collect the amount of the exta monthly income
-		if (yesOrNot.equals("yes")) {
+		if (yesOrNo.equals("yes")) {
 			System.out.println("\nPlease, enter the amount of your extra income.");
 			monthlyExtraIncome = getPositiveInt(scanner);
 		}	
+		
+
 		/*
 		 * Check if the applicant's overall income reaches the 2000 Euros:
 		 *   if the amount exceeds the 2000 Euros -> Inform the Applicant about it;
-		 *   if the amount is below the 200 Euros -> Call the method 'createAccount' in the superclass 'Methods'
+		 *   if the amount is below the 2000 Euros -> Call the method 'createAccount' in the superclass 'Methods'
 		 */
 		if (overallIncome >= 2000) { 																			
 			System.out.println("\n\tDear " + name + ",\nThe amount of your income is considered as sufficient and "
-					+ "it fully covers the amount stipulated within this support program.\nThank you for visiting us!");
+					+ "it fully covers the amount which is stipulated within this support program.\nThank you for visiting us!");
 			System.exit(0);
 		}
-		// Call the method 'createAccount' If the Applicant is eligible reffer to 'createAccount'
+
+		// Call the method 'createAccount' if the Applicant is eligible 
 		createAccount(scanner); 
+        // Place the 'occupation' of the Applicant in the already created profile via the 'createAccount' method
+		profiles.put(phoneNumber, new Info (name, age, "Unemployed", overallIncome, password, statusOfApplication));
+		Main.Menu(); // After gathering the info and creating the profile, send the Applicant to the main Menu
+
 	}
 }
 
@@ -621,10 +649,10 @@ class Retired extends Info {
 
 		// Check if the Applicant is having an extra income
 		System.out.println("\nAre you having an extra monthly income (besides the pension)?");
-		yesOrNot = yesOrNot(scanner);
+		yesOrNo = yesOrNo(scanner);
 
 		// If yes, Collect the amount of the exta monthly income
-		if (yesOrNot.equals("yes")) {
+		if (yesOrNo.equals("yes")) {
 			System.out.println("\nPlease, enter the amount of your extra income.");
 			monthlyExtraIncome = getPositiveInt(scanner);
 		}
@@ -638,8 +666,13 @@ class Retired extends Info {
 					+ "it fully covers the amount stipulated within this support program.\nThank you for visiting us!");
 			System.exit(0);
 		}
+
 		// Call the method 'createAccount' If the Applicant is eligible reffer to 'createAccount'
 		createAccount(scanner); 
+        // Place the 'occupation' of the Applicant in the already created profile via the 'createAccount' method
+		profiles.put(phoneNumber, new Info (name, age, "Retired", overallIncome, password, statusOfApplication));
+		Main.Menu(); // After gathering the info and creating the profile, send the Applicant to the main Menu
+
 	}
 }
 
@@ -651,14 +684,14 @@ class Registered extends Info {
 	 */
 	static void accessAccount() {
 
-		System.out.println(
+		System.out.println( //  Ask the Applicant to enter the personal contact phone number, i.e. the 'key'
 				"\nIn order to enter to your personal account we need your personal/ registered contact phone number.");
 		phoneNumber = getPositiveInt(scanner);
 
 		if (profiles.containsKey(phoneNumber)) {
 			System.out.println("\nPlease, enter your password.");
 			enterPassword(scanner);
-		} else {
+		} else { // If the entered contact phone number is not in the list, send the Applicant to the main Menue
 			System.out.println("It looks like you are not registered yet. You are back to the main Menu.\n");
 			Main.Menu();
 		}
