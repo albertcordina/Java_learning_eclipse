@@ -599,12 +599,11 @@ class Unemployed extends Info {
 		/* If the Applicant has not applied for the unemplyment benefits yet, 
 		 * reffer the Applicant to the appropriate Social Services.
 		 */	
-		if (yesOrNo.equals("not")) {
+		if (yesOrNo.equals("no")) {
 			System.out.println("\n" + name +
 					"\n, according to the regulation of the social service support you are "
 					+ "eligible for the unemployment benefits. \nTherefore, we advise you also to contact your local unemployement"
 					+ " servise for clarification of this subject and then inform us about the outcome.");
-			System.exit(0);
 		}
 		
 		// Check if the Applicant is having an extra income
@@ -663,7 +662,7 @@ class Retired extends Info {
 		 */
 		if (overallIncome >= 2000) { // we check the applicant's income altogether 
 			System.out.println("\n\tDear " + name + ",\nThe amount of your income is considered as sufficient and "
-					+ "it fully covers the amount stipulated within this support program.\nThank you for visiting us!");
+					+ "it fully covers the amount which is stipulated within this support program.\nThank you for visiting us!");
 			System.exit(0);
 		}
 
