@@ -244,8 +244,7 @@ class Methods { // Contains almost all methods of the project
 				+ "In order to create your personal account, we need to have your personal contact phone number.");
 		Info.phoneNumber = getValidPhoneNumber(scanner);
 
-		// If the phone number is in the list, send the Applicant to the Class
-		// Registered
+		// If the phone number is in the list, send the Applicant to the Class Registered
 		if (Info.profiles.containsKey(Info.phoneNumber)) {
 			System.out.println("It looks that you are already registered.");
 			Registered.accessAccount();
@@ -481,8 +480,10 @@ class Info extends Methods {
 			if (yesOrNo.equals("yes")) {
 				retired.eligibility();
 
-				// If the Applicant has not applied for the pension, reffer the Applicant to the
-				// appropriate Social Services
+				/*
+				 * If the Applicant has not applied for the pension,  
+				 * reffer the Applicant to the appropriate Social Services.
+				 */
 			} else {
 				System.out.println("\n\tDear " + name
 						+ ",\nAccording to your age and the regulation of the social service support you are "
@@ -500,11 +501,15 @@ class Info extends Methods {
 					monthlyExtraIncome = getPositiveInt(scanner);
 				}
 
-				// Call the method 'createAccount' If the Applicant is eligible reffer to
-				// 'createAccount'
+				/*
+				 * Call the method 'createAccount' If the Applicant 
+				 * is eligible reffer to 'createAccount'
+				 */
 				createAccount(scanner);
-				// Place the 'occupation' of the Applicant in the already created profile via
-				// the 'createAccount' method
+				/*
+				 * Place the 'occupation' of the Applicant in the 
+				 * already created profile via the 'createAccount' method
+				 */
 				profiles.put(phoneNumber, new Info(name, age, "Retired (needs outcome from Social Service)",
 						overallIncome, password, statusOfApplication));
 				Main.Menu(); // After gathering the info and creating the profile, send the Applicant to the
