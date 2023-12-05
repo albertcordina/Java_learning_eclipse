@@ -9,7 +9,7 @@ public class Array_list {
         //             Elements can be added and removed after compilation phase
         //             store reference data types
 
-        ArrayList<String> food = new ArrayList<>();
+        List<String> food = new ArrayList<>();
        // List<String> food = Arrays.asList("milk", "butter"); // with 'asList' only 'set' works
 
         food.add("pizza"); //  'add' method is to add a value;
@@ -28,7 +28,7 @@ public class Array_list {
         
 
         //      Training:
-        ArrayList<Integer> list = new ArrayList<>();
+        List<Integer> list = new ArrayList<>();
 
         list.add(9);
         list.add(52);
