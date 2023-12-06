@@ -21,8 +21,10 @@ public class Taking_Int_CertainAmountOfDigits_phoneNumber_Scanner {
 			System.out.print("Enter a number with 7 to 15 digits: ");
 
 			try {
-				// the input logic to use scanner.next() instead of scanner.nextLine(): i.e.
-				// to ensure that the newline character does not interfere with subsequent inputs.
+				/*
+				 * the input logic to use scanner.next() instead of scanner.nextLine(): i.e.
+				 * to ensure that the newline character does not interfere with subsequent inputs.
+				 */
 				validPhoneNumber = Integer.parseInt(scanner.next());
 				// Check if the number of digits is between 7 and 15 (inclusive)
 				if (String.valueOf(validPhoneNumber).length() >= 7 && String.valueOf(validPhoneNumber).length() <= 15) {
