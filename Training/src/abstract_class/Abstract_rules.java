@@ -17,8 +17,9 @@ abstract class A { // abstract class can not be instantiated (called in another 
     }
 
 }
-public class Abstract_rules {
+public class Abstract_rules  {
     public static void main(String[] args) {
 
+    	
     }
 }

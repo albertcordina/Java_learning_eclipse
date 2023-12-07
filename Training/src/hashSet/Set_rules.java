@@ -68,4 +68,10 @@ public class Set_rules {
 		}   	
     }
 }
+/*
+ * The main difference between them is that HashSet stores unique elements without any associated values, 
+ * while HashMap stores key-value pairs where the keys are unique identifiers and the values are associated data. 
+ * Developers need to choose the appropriate data structure based on the specific needs of their program.
+ * 
+ */
  

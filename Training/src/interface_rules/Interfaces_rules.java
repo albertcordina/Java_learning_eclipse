@@ -1,6 +1,6 @@
 package interface_rules;
 
-interface Interfaces_rules {  
+interface Interfaces_example {  
 	/*
 	 * 
 	 *  'Interface' with its variables and methods are used as a template/ design for other classes; 
@@ -30,4 +30,18 @@ interface Interfaces_rules {
 	
 	void play ();
 
+}
+public class Interfaces_rules implements Interfaces_example { 
+	
+	public static void main(String[] args) {
+		Interfaces_rules rules = new Interfaces_rules ();
+		rules.play();
+	
+	}
+
+	@Override
+	public void play() {
+ 
+		System.out.println("You are playing!");
+	}
 }

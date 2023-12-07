@@ -48,9 +48,9 @@ class DeliveryService { // Has the main logic
 		}
 	}
 	
-    public void displayDeliveries() {
+    public void displayDeliveries() {  // Displays the whole List of the Deliveries 	
         System.out.println("List of Deliveries:");
-        for (Delivery delivery : deliveries) {
+        for (Delivery delivery : deliveries) {  // Iterate and print out the whole List
             System.out.println("ID: " + delivery.getDeliveryId() + ", Item: " + delivery.getItemName() +
                     ", Weight: " + delivery.getItemWeight() + ", Customer: " + delivery.getCustomer().getName() +
                     ", Delivered: " + (delivery.isDelivered() ? "Yes" : "No"));
@@ -146,11 +146,9 @@ class Customer {
 		return customerId;
 	}
 
-
 	public String getName() {
 		return name;
 	}
-
 
 	public String getAddress() {
 		return address;
@@ -164,7 +162,7 @@ public class Main {
 	public static void main(String[] args) {
 
 		Scanner scanner = new Scanner (System.in);
-		
+		// Create instance to the main logic class, i.e. DeliveryService
 		DeliveryService deliveryService = new DeliveryService ();
 		
 		 int choice;

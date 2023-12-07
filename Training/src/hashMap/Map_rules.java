@@ -1,13 +1,18 @@
 package hashMap;
 import java.util.*;
+import java.util.HashMap;
+import java.util.TreeMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
+
 public class Map_rules {  
 
 	public static void main(String[] args) {
 		
 		/*                                                         HASH MAP:
 		
-           does not accept duplicates and does not support the ordering of the elements; NOTE: never use it if the elements should be in a certain order;
-		   it  allows the same values (second element), but does not allow the same keys (the first element);
+           does not accept duplicates and does not support the ordering of the elements; NOTE: never use it if the elements should be in a certain order.
+		   It  allows the same values (second element), but does not allow the same keys (the first element);
 		   exists in pair, i.e. the two Strings;
 		   it uses the LinkedList
 		   it does not have a reference to the previous element but has a reference to the next one;
@@ -20,7 +25,7 @@ public class Map_rules {
 		 */
 		
 		       //  key     value  
-		Map <Integer, String> employeeIDs = new HashMap<>(); // 'Map' is a supertype/ superclass;
+		Map <Integer, String> employeeIDs = new HashMap<>(); // 'Map' is a supertype/ interface;
 		
 		employeeIDs.put(6589, "John");
 		employeeIDs.put(5847, "Susan");
@@ -45,7 +50,7 @@ public class Map_rules {
 		
 		//                                                       LINKED HASH MAP:
 		
-		// the 'LinkedHashMap' in compare with 'HashMap' maintans the order (i.e. keeps all the elements in a particular order);
+		// The 'LinkedHashMap' in compare with 'HashMap' maintans the order (i.e. keeps all the elements in a particular order);
 		// it is similar to 'TreeMap';
 		// < Node link to the previous element -> Key -> Value -> Node link to the next element >
 		
@@ -62,8 +67,8 @@ public class Map_rules {
 		
 		//                                                           TREE MAP:
 		
-		// the 'TreeMap' is a combination of 'HashMap' and 'TreeSet';
-		// it authomatecally sorts the elements according to the 'key' (i.e. the first element) 'numerical' or 'alphabetical' order;
+		// The 'TreeMap' is a combination of 'HashMap' and 'TreeSet'.
+		// It authomatecally sorts the elements according to the 'key' (i.e. the first element) 'numerical' or 'alphabetical' order.
 		Map <Integer, String> months2 = new TreeMap<>(); 
 		
 		months2.put(11, "Nov");
@@ -79,7 +84,13 @@ public class Map_rules {
 	}
 }
 /*
+ * There are several differences between HashMap and Hashtable in Java:
+ * 
  * The Hashtable class in Java is one of the oldest members of the Java Collection Framework. 
  * A hash table is an unordered collection of key-value pairs, with a unique key for each value. 
  * In a hash table, data is stored in an array of list format, with a distinct index value for each data value.
+ * 
+ *1. Hashtable is synchronized, whereas HashMap is not. This makes HashMap better for non-threaded applications, 
+ *             as unsynchronized Objects typically perform better than synchronized ones.
+ *2. Hashtable does not allow null keys or values. HashMap allows one null key and any number of null values.
  * */
