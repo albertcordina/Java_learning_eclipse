@@ -44,7 +44,7 @@ class Cat implements Animal {
 
  public void climb() {
      System.out.println("Climbing the tree!");
- }
+  }
 }
 
 //Main class to test the implementations
@@ -60,10 +60,12 @@ public class Interface_AnimalTest {
      myDog.makeSound(); // Output: Woof! Woof!
      myCat.makeSound(); // Output: Meow!
 
-     // Uncommenting the lines below will result in a compilation error
-     // because the fetch() method is not part of the Animal interface.
-     // myDog.fetch();
-     // myCat.climb();
- }
+     /*
+      * Uncommenting the lines below will result in a compilation error because 
+      *   the fetch() method is not part of the Animal interface.
+      *                myDog.fetch();
+      *                myCat.climb();
+      */
+  }
 }
 
