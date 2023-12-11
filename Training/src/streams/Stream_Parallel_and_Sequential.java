@@ -17,14 +17,11 @@ public class Stream_Parallel_and_Sequential {
 
         // Sequential stream processing
         System.out.println("Sequential Stream:");
-        Arrays.stream(numbers)
-                .forEach(System.out::println);
+        Arrays.stream(numbers).forEach(System.out::println);
 
         // Parallel stream processing
         System.out.println("\nParallel Stream:");
-        Arrays.stream(numbers)
-                .parallel()
-                .forEach(System.out::println);
+        Arrays.stream(numbers).parallel().forEach(System.out::println);
 		
 /*
  * In this example, we have an array of integers, and we use the Arrays.stream method to create a stream. 

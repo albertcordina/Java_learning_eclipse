@@ -3,6 +3,7 @@ package streams;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class Streams_methods_forLists {
@@ -43,9 +44,9 @@ public class Streams_methods_forLists {
         List <Person> person = Arrays.asList(new Person( "Karen", 50), new Person ("Anna", 65), new Person ("Bob", 40));
         
         
-        // Sort people by age and save in the new List:
+        // Sort people by age and save in the new List of Objects:
         List<Person> sortedPeopleByAge = sortByAttribute(person, Comparator.comparingInt(Person::getAge));
-        // Sort people by name and save in the new List:
+        // Sort people by name and save in the new List of Objects:
         List<Person> sortedPeopleByName = sortByAttribute(person, Comparator.comparing(Person::getName));
 
         // Print the sorted lists:
@@ -54,6 +55,15 @@ public class Streams_methods_forLists {
         System.out.println("\nSorted People by Name: ");
         sortedPeopleByName.forEach(a -> System.out.println(a.getName() + ": " + a.getAge()));
 		
+        
+      // Extracts names of people and save in the new String or Integer List:
+        List<String> namesOnly = extractAttribute(person, Person::getName);
+        System.out.println(namesOnly); // prints out [Karen, Anna, Bob]
+        
+        List<Integer> agesOnly = extractAttribute(person, Person::getAge);
+        System.out.println(agesOnly); // prints out [50, 65, 40]
+        		
+        
 	}
 	
 	//------------------------------ METHODS --------------------------------------
@@ -134,19 +144,22 @@ public class Streams_methods_forLists {
     }
 //--------------------------------- Custom Objects -----------------------------------
     
-    // Generic method to sort objects based on a specific attribute
+    // Generic method to sort objects based on a specific attribute:
     public static <T> List<T> sortByAttribute(List<T> objects, Comparator<? super T> comparator) {
     	
         return objects.stream().sorted(comparator).collect(Collectors.toList());        
     }
-    
-    public static <T> List<T> sortByString(List<T> objects, Comparator<? super T> comparator) {
-
-	people.stream().filter(person -> person.name == "Lolo").forEach(person -> System.out.println(person.age));
-
+    /*
+     * Extracting a specific attribute from objects.
+     * this method below extracts attributes of any type from a list of objects:
+     */
+    public static <T, R> List<R> extractAttribute(List<T> objects, Function<? super T, R> attributeExtractor) {
+    	
+        return objects.stream().map(attributeExtractor).collect(Collectors.toList());
     }
 }
 
+	
 /*
  * These are just a few examples of the many methods available in the Stream
  * API. The API is quite extensive and provides a rich set of operations for

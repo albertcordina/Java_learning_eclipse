@@ -3,6 +3,7 @@ package streams;
 import java.util.stream.Collectors;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 
 public class Stream_rules_and_methods_forLists {
 	/*
@@ -44,8 +45,9 @@ public class Stream_rules_and_methods_forLists {
 		
 		numbers.stream().map(n -> n * 2).forEach(System.out::println);  // Doubling each number in a list (example)
 		
-		// Extracting a specific attribute from objects
-        people.stream().map(person -> person.name).forEach(System.out::println); 
+		// Extracting a specific attribute from objects and save it in the List.
+        List <String> namesFromObject = people.stream().map(a -> a.name).toList();
+        System.out.println(namesFromObject); // prints out 'Lolo, Leo'
         
 
 /*

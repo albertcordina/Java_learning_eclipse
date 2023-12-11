@@ -38,7 +38,7 @@ public class Stream_Allothers_likeReadingFiles {
 			lines.forEach(System.out :: println);                        // printing it out
 		} catch (IOException e) { e.printStackTrace();}
   /*
-   * 	// reading the file (example: a file of the same project)	
+   *  reading the file (example: a file of the same project)	
 	Files.lines(Paths.get("text.txt")).forEach(System.out :: println);
    * 		
    */
