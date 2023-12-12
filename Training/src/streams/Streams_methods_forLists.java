@@ -41,7 +41,7 @@ public class Streams_methods_forLists {
         
         
     //---------------------------- Objects ----------------------------------------    
-        List <Person> person = Arrays.asList(new Person( "Karen", 50), new Person ("Anna", 65), new Person ("Bob", 40));
+        List <Person> person = Arrays.asList(new Person( "Karen", "Cheatle", 50), new Person ("Anna", "Boom", 65), new Person ("Bob", "Marley", 40));
         
         
         // Sort people by age and save in the new List of Objects:
@@ -51,17 +51,20 @@ public class Streams_methods_forLists {
 
         // Print the sorted lists:
         System.out.println("\nSorted People by Age:");
-        sortedPeopleByAge.forEach(a -> System.out.println(a.getName() + ": " + a.getAge()));
+        sortedPeopleByAge.forEach(a -> System.out.println(a.getName() + " " + a.getSurname() + ": " + a.getAge()));
         System.out.println("\nSorted People by Name: ");
-        sortedPeopleByName.forEach(a -> System.out.println(a.getName() + ": " + a.getAge()));
+        sortedPeopleByName.forEach(a -> System.out.println(a.getName() + " " + a.getSurname() + ": " + a.getAge()));
 		
         
-      // Extracts names of people and save in the new String or Integer List:
+      // Extracts a particular atribute and saves it in the new String or Integer List:
         List<String> namesOnly = extractAttribute(person, Person::getName);
         System.out.println(namesOnly); // prints out [Karen, Anna, Bob]
         
         List<Integer> agesOnly = extractAttribute(person, Person::getAge);
         System.out.println(agesOnly); // prints out [50, 65, 40]
+        
+        List<String> surnamesOnly = extractAttribute(person, Person::getSurname);
+        System.out.println(surnamesOnly); // prints out [Cheatle, Boom, Marley]
         		
         
 	}
@@ -73,40 +76,31 @@ public class Streams_methods_forLists {
  // The method 'findWordStarsWith' filters the List for the word(s) starting with a letter.
 	private static List <String> findWordStartsWith (List <String> list, String letter) {
 		
-		List <String> filteredList;
-		filteredList = list.stream().filter(a -> a.startsWith(letter)).toList(); 	
-		return filteredList;
+		return list.stream().filter(a -> a.startsWith(letter)).toList(); 	
 	}
+	
  // The method 'findWordByLength' filters the List for the word(s) of particlar length.	
 	private static List <String> findWordByLengthEqual (List <String> list, int length) {
 		
-		List <String> filteredList;
-		filteredList = list.stream().filter(a -> a.length() == length).toList();
-		return filteredList;
+		return list.stream().filter(a -> a.length() == length).toList();
 	}
 	
  // The method 'findWordByLengthFrom' filters the List for the word(s) of particlar length.	
 	private static List <String> findWordByLengthFrom (List <String> list, int length) {
 		
-		List <String> filteredList;	
-		filteredList = list.stream().filter(a -> a.length() >= length).toList();
-		return filteredList;
+		return list.stream().filter(a -> a.length() >= length).toList();
 	}
 	
  // The method 'findWordByLengthFrom' filters the List for the word(s) of particlar length.	
 	private static List <String> findWordByLengthUpTo (List <String> list, int length) {
 		
-		List <String> filteredList;		
-		filteredList = list.stream().filter(a -> a.length() <= length).toList();
-		return filteredList;
+		return list.stream().filter(a -> a.length() <= length).toList();
 	}
 	
       // The method 'convertToUpperCase' converts the List to UpperCase.
-	private static List <String> convertToUpperCase (List <String> originalList) {
+	private static List <String> convertToUpperCase (List <String> list) {
 		
-		List <String> convertedList;
-		convertedList = originalList.stream().map(String :: toUpperCase).toList();
-		return convertedList; 
+		return list.stream().map(String :: toUpperCase).toList();
 	}
 
 	
@@ -114,18 +108,14 @@ public class Streams_methods_forLists {
 	
     // The method 'findEvenNumbers' filters the List for the even numbers.	
 	private static List <Integer> findEvenNumbers (List <Integer> list) {
-		
-		List <Integer> listOfEvenNumbers;
-		listOfEvenNumbers = list.stream().filter(a -> a % 2 == 0).toList();
-		return listOfEvenNumbers;
+
+		return list.stream().filter(a -> a % 2 == 0).toList();
 	}
 	
 // The method 'findNumbersFromToIncluded' filters the List for the numbers within the two numbers.
 	private static List <Integer> findNumbersFromToIncluded (List <Integer> list, int from, int to) {
 		
-		List <Integer> listOfFromTo;
-		listOfFromTo = list.stream().filter(a -> a >= from && a <= to).toList();
-		return listOfFromTo;
+		return list.stream().filter(a -> a >= from && a <= to).toList();
 	}
 	
   // The method 'calculateSum' calculates the sum of the Integer List.
@@ -138,29 +128,29 @@ public class Streams_methods_forLists {
     // The method 'sortNumericalOrder' sorts the List in numerical order.
     private static List <Integer> sortNumericalOrder (List <Integer> list) {
     	
-    	List <Integer> orderedList;
-    	orderedList = list.stream().sorted().collect(Collectors.toList());
-    	return orderedList;
+    	return list.stream().sorted().collect(Collectors.toList());
     }
 //--------------------------------- Custom Objects -----------------------------------
     
     // Generic method to sort objects based on a specific attribute:
-    public static <T> List<T> sortByAttribute(List<T> objects, Comparator<? super T> comparator) {
+    public static <T> List<T> sortByAttribute(List<T> objects, Comparator<? super T> a) {
     	
-        return objects.stream().sorted(comparator).collect(Collectors.toList());        
+        return objects.stream().sorted(a).collect(Collectors.toList());        
     }
     /*
-     * Extracting a specific attribute from objects.
-     * this method below extracts attributes of any type from a list of objects:
+     * The method 'extractAttribute' extracts any type of attribute from a List of objects:
      */
-    public static <T, R> List<R> extractAttribute(List<T> objects, Function<? super T, R> attributeExtractor) {
+    public static <T, R> List<R> extractAttribute(List<T> objects, Function<? super T, R> a) {
     	
-        return objects.stream().map(attributeExtractor).collect(Collectors.toList());
+        return objects.stream().map(a).collect(Collectors.toList());
     }
 }
 
 	
 /*
+ * comparator
+ * attributeExtractor
+ * 
  * These are just a few examples of the many methods available in the Stream
  * API. The API is quite extensive and provides a rich set of operations for
  * working with collections in a functional programming style.
@@ -170,15 +160,21 @@ public class Streams_methods_forLists {
 
 class Person {
 	String name;
+	String surname;
 	int age;
 
-	Person(String name, int age) {
+	Person(String name, String surname, int age) {
 		this.name = name;
+		this.surname = surname;
 		this.age = age;
 	}
 
 	public String getName() {
 		return name;
+	}
+	
+	public String getSurname() {
+		return surname;
 	}
 
 	public int getAge() {
