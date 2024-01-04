@@ -5,20 +5,21 @@ import java.util.ArrayList;
 
 public class ArrayListToSQL {
 
+	
     public static void main(String[] args) {
     	
-        // Step 2: Establish JDBC connection:
-    	String url = "jdbc:mysql://localhost:3306/mydb"; // for mysql.
+        // Establish JDBC connection:
+    	String url = "jdbc:mysql://localhost:3306/mydb"; // for mysql (port:3306).
         String username = "albertcordina";
         
-      //  String url = "jdbc:postgresql://localhost:5432/albertcordina"; // for postgresql.
+      //  String url = "jdbc:postgresql://localhost:5432/albertcordina"; // for postgresql (port:5432).
       //  String username = "postgres";
         
         String password = "Forecastoflove1516";
 
         try (Connection connection = DriverManager.getConnection(url, username, password)) {
         	
-            // Step 4: Populate ArrayList with data:
+            // Populate ArrayList with data:
             ArrayList<MyDataModel> dataList = new ArrayList<>();
             dataList.add(new MyDataModel("Anna", 34));
             dataList.add(new MyDataModel("Wiliam", 52));
@@ -41,8 +42,9 @@ public class ArrayListToSQL {
     }
 }
 
-// Step 3: Create a Data Model
-class MyDataModel {
+
+class MyDataModel {   // Create a Data Model
+	
     private String name;
     private int age;
 

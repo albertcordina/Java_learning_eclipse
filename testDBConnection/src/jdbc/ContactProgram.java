@@ -7,6 +7,7 @@ import java.sql.Statement;
 
 public class ContactProgram {
 
+	
     public static void main(String[] args) {
 
         //String sql = "select name from Products where id=2"; // getting a value.
